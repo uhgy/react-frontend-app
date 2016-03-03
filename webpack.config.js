@@ -54,8 +54,8 @@ var path = require('path');
 var node_modules_dir = path.resolve(__dirname, 'node_modules');
 
 var deps = [
-	'react/dist/react.min.js',
-	'react-dom/dist/react-dom.min.js',
+	//'react/dist/react.min.js',
+	//'react-dom/dist/react-dom.min.js',
 	//'react-dom/dist/react-dom-server.min.js'
 	//'react-router/umd/ReactRouter.min.js'
 ];
@@ -78,8 +78,8 @@ var config = {
 				presets:['es2015', 'react']
 			}
 		}, {
-			test: /\.css$/, // Only .css files
-			loader: 'style!css' // Run both loaders
+			test: /\.less$/, // .less files
+			loader: 'style!css!less' // Run three loaders
 		}],
 		noParse: []
 	}

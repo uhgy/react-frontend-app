@@ -23,8 +23,8 @@ var config = {
 			}
 		}
 		, {
-			test: /\.css$/, // Only .css files
-			loader: 'style!css' // Run both loaders
+			test: /\.less$/, // .less files
+			loader: 'style!css!less' // Run three loaders
 		}],
 		//noParse: [pathToReact]
 	},

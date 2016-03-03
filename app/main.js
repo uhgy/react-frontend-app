@@ -1,12 +1,13 @@
 import React from 'react';
-import {render} from 'react-dom'
+import {render} from 'react-dom';
 import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'react-router';
 import Hello from './helloworld';
 import auth from './auth/auth';
 import Login from './auth/login';
+import Article from './article/article';
 import Register from './auth/register';
-import requestApi from './request';
-import './main.css';
+import './main.less';
+
 
 
 var App = React.createClass({
@@ -28,10 +29,9 @@ var App = React.createClass({
 	},
 
 	render() {
-		console.log(this.state);
 		return (
 				<div>
-					<h1>APP!</h1>
+					<h1>Single Page App</h1>
 					<ul>
 						<li><Link      to="/"    >/</Link></li>
 						<li><IndexLink to="/"   >/ Home</IndexLink></li>
@@ -54,25 +54,21 @@ var App = React.createClass({
 
 var Home = React.createClass({
 	getInitialState() {
-		return {
-			articles: []
-		}
+		return {}
 
 	},
 	componentWillMount() {
-		requestApi.getArticles()
-		console.log('in')
+
 	},
 	render() {
 		return (
 			<div>
 				<h2>Home</h2>
-				{this.state.articles}
+				<Article/>
 			</div>
 		)
 	}
 })
-
 
 var Logout = React.createClass({
 	componentDidMount() {

@@ -4,7 +4,7 @@
 import React from 'react';
 import {render} from 'react-dom';
 import auth from './auth';
-import './login.css';
+import './login.less';
 
 
 var Login = React.createClass({

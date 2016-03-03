@@ -4,7 +4,7 @@
 
 import React from 'react';
 import {render} from 'react-dom';
-import './login.css';
+import './login.less';
 
 export default class Register extends React.Component {
 	render() {
