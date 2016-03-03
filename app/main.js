@@ -4,11 +4,10 @@ import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'reac
 import Hello from './helloworld';
 import auth from './auth/auth';
 import Login from './auth/login';
-import Article from './article/article';
+import ArticleList from './article/ArticleList';
+import Article from './article/Article';
 import Register from './auth/register';
 import './main.less';
-
-
 
 var App = React.createClass({
 	getInitialState() {
@@ -35,6 +34,7 @@ var App = React.createClass({
 					<ul>
 						<li><Link      to="/"    >/</Link></li>
 						<li><IndexLink to="/"   >/ Home</IndexLink></li>
+						<li><IndexLink to="/articles"   >/ Articles</IndexLink></li>
 						<li>
 							{this.state.loggedIn ? (
 									<Link to="/logout">Log out</Link>
@@ -64,7 +64,6 @@ var Home = React.createClass({
 		return (
 			<div>
 				<h2>Home</h2>
-				<Article/>
 			</div>
 		)
 	}
@@ -88,6 +87,9 @@ render((
 	<Router history={browserHistory}>
 		<Route path="/" component={App} >
 			<IndexRoute component={Home}/>
+			<Route path="articles" component={ArticleList}/>
+			<Route path="articles/:id" component={Article}/>
+
 			<Route path="/login" component={Login}/>
 			<Route path="/register" component={Register}/>
 			<Route path="/logout" component={Logout}/>

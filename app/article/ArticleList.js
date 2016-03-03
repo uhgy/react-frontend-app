@@ -3,8 +3,9 @@
  */
 import React from 'react';
 import {render} from 'react-dom';
+import {Link} from 'react-router';
 import requestApi from '../request';
-import './article.less';
+import './ArticleList.less';
 
 var styles = {};
 
@@ -14,22 +15,23 @@ styles.inner = {
 	textAlign: 'center'
 }
 
-var Article = React.createClass({
+var ArticleList = React.createClass({
 	getInitialState() {
-		return {articles: []};
+		return {articles: []}
 	},
 
 	componentWillMount() {
 		requestApi.getArticles().pipe(
 			function(data){
-				var data = JSON.parse(data);
+				var data = JSON.parse(data)
 				this.setState({ articles:data['articles'] })
 			}.bind(this)
-		);
+		)
 	},
 
+
 	render() {
-		console.log(this.state.articles)
+		//console.log(this.state.articles)
 		return (
 			<section id="article_area">
 				{this.state.articles.map(function (article) {
@@ -42,15 +44,17 @@ var Article = React.createClass({
 									{article.published_at}
 								</p>
 								<p>{article.content}</p>
+								<Link to={`/articles/${article.id}`}>more</Link>
 							</div>
 						</article>
 					)
 				})
 				}
+				{this.props.children}
 			</section>
 		)
 	}
 
 })
 
-export default Article;
+export default ArticleList;

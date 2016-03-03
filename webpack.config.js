@@ -56,7 +56,7 @@ var node_modules_dir = path.resolve(__dirname, 'node_modules');
 var deps = [
 	//'react/dist/react.min.js',
 	//'react-dom/dist/react-dom.min.js',
-	//'react-dom/dist/react-dom-server.min.js'
+	//'react-dom/dist/react-dom-server.min.js',
 	//'react-router/umd/ReactRouter.min.js'
 ];
 
