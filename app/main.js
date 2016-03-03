@@ -2,9 +2,10 @@ import React from 'react';
 import {render} from 'react-dom'
 import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'react-router';
 import Hello from './helloworld';
-import auth from './auth/auth'
+import auth from './auth/auth';
 import Login from './auth/login';
 import Register from './auth/register';
+import requestApi from './request';
 import './main.css';
 
 
@@ -59,7 +60,8 @@ var Home = React.createClass({
 
 	},
 	componentWillMount() {
-		auth.jsonpRequest();
+		requestApi.getArticles()
+		console.log('in')
 	},
 	render() {
 		return (
