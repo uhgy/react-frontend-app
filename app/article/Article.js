@@ -16,7 +16,7 @@ var Article = React.createClass({
 			function(data){
 				console.log(data)
 				var data = JSON.parse(data)
-				this.setState({ article: data })
+				this.setState({ article: data['data']['article'] })
 			}.bind(this)
 		)
 	},

@@ -6,6 +6,7 @@ import auth from './auth/auth';
 import Login from './auth/login';
 import ArticleList from './article/ArticleList';
 import Article from './article/Article';
+import CreateArticle from './article/CreateArticle';
 import Register from './auth/register';
 import './main.less';
 
@@ -34,7 +35,8 @@ var App = React.createClass({
 					<ul>
 						<li><Link      to="/"    >/</Link></li>
 						<li><IndexLink to="/"   >/ Home</IndexLink></li>
-						<li><IndexLink to="/articles"   >/ Articles</IndexLink></li>
+						<li><Link to="/article"   >/ Articles</Link></li>
+						<li><Link to="/create/article"   >/ Create Article</Link></li>
 						<li>
 							{this.state.loggedIn ? (
 									<Link to="/logout">Log out</Link>
@@ -87,9 +89,9 @@ render((
 	<Router history={browserHistory}>
 		<Route path="/" component={App} >
 			<IndexRoute component={Home}/>
-			<Route path="articles" component={ArticleList}/>
-			<Route path="articles/:id" component={Article}/>
-
+			<Route path="article" component={ArticleList}/>
+			<Route path="article/:id" component={Article}/>
+			<Route path="create/article" component={CreateArticle}/>
 			<Route path="/login" component={Login}/>
 			<Route path="/register" component={Register}/>
 			<Route path="/logout" component={Logout}/>

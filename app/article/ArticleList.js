@@ -24,7 +24,7 @@ var ArticleList = React.createClass({
 		requestApi.getArticles().pipe(
 			function(data){
 				var data = JSON.parse(data)
-				this.setState({ articles:data['articles'] })
+				this.setState({ articles:data['data']['articles'] })
 			}.bind(this)
 		)
 	},
@@ -44,7 +44,7 @@ var ArticleList = React.createClass({
 									{article.published_at}
 								</p>
 								<p>{article.content}</p>
-								<Link to={`/articles/${article.id}`}>more</Link>
+								<Link to={`article/${article.id}`}>more</Link>
 							</div>
 						</article>
 					)

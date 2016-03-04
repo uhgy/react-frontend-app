@@ -1,4 +1,27 @@
+import $ from 'jquery';
+
 module.exports = {
+
+	//postLogin(data) {
+	//	$.ajax({
+	//		url: '/api/auth/login',
+	//		type: 'POST',
+	//		data: data
+	//	}).done(function( data ) {
+	//		console.log(data)
+	//	})
+	//},
+	//
+	//postRegister() {
+	//	$.ajax({
+	//		url: '/api/auth/register',
+	//		type: 'POST',
+	//		data: data
+	//	}).done(function( data ) {
+	//		console.log(data)
+	//	})
+	//},
+
 	login(email, pass, cb) {
 		cb = arguments[arguments.length - 1]
 		if (localStorage.token) {
@@ -37,6 +60,7 @@ module.exports = {
 
 function pretendRequest(email, pass, cb) {
 	setTimeout(() => {
+
 		if (email === 'joe@example.com' && pass === 'password1') {
 			cb({
 				authenticated: true,
@@ -47,3 +71,5 @@ function pretendRequest(email, pass, cb) {
 		}
 	}, 0)
 }
+
+
