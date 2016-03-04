@@ -49,7 +49,7 @@ app.use('/api', function (req, res) {
 });
 
 app.post('/api', function(req, res) {
-	//request(config.backendAddress+req.path
+
 })
 
 app.get('/', function (req, res) {
