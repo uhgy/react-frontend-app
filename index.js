@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //console.log(config.env_mode);
 if(config.env_mode == 'dev'){
 	app.use(express.static(path.join(__dirname, 'build')));
-}else if(config.env_mode == 'deploy'){
+}else if(config.env_mode == 'deploy' || config.env_mode == 'production'){
 	app.use(express.static(path.join(__dirname, 'dist')));
 }
 
