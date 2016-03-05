@@ -14,10 +14,16 @@ var Footer = React.createClass({
 	},
 	render() {
 		return (
-			<footer className="container">
+			<footer>
 				<div className="row">
-					<h3>Footer</h3>
+					<p>Powered by<strong>React</strong>,<strong>Nodejs</strong></p>
 				</div>
+				<nav>
+					<ul>
+						<li><a href="#">Privacy Policy</a></li>
+						<li><a href="#">Huang Gongyu</a></li>
+					</ul>
+				</nav>
 			</footer>
 		)
 	}
