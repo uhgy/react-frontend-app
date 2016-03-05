@@ -80,6 +80,12 @@ var config = {
 		}, {
 			test: /\.less$/, // .less files
 			loader: 'style!css!less' // Run three loaders
+		}, {
+			test: /\.(png|jpg)$/,
+			loader: 'url?limit=25000'
+		}, {
+			test: /\.(woff|eot|svg|ttf|woff2)$/,
+			loader: 'url?limit=100000'
 		}],
 		noParse: []
 	}

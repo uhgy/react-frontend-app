@@ -12,7 +12,7 @@ import Login from './components/Login';
 import App from './components/App';
 import Home from './components/Home';
 import Logout from './components/Logout';
-
+import './main.less';
 
 
 export default (

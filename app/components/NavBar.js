@@ -15,24 +15,23 @@ var NavBar = React.createClass({
 	},
 	render() {
 		return (
-			<nav className="navbar">
-				<div className="navbar-header">
-					<button className="navbar-toggle collapsed">
-						<ul>
-							<li><IndexLink to="/"   >/ Home</IndexLink></li>
-							<li><Link to="/article"   >/ Articles</Link></li>
-							<li><Link to="/create/article"   >/ Create Article</Link></li>
-							<li>
-								{this.state.loggedIn ? (
+			<nav className="navbar navbar-default navbar-static-top">
+				<div className="navbar navbar-collapse">
+					<ul className="nav nav-tabs">
+						<li><IndexLink to="/"   >/ Home</IndexLink></li>
+						<li><Link to="/article"   >/ Articles</Link></li>
+						<li><Link to="/create/article"   >/ Create Article</Link></li>
+					</ul>
+					<ul>
+						<li>
+							{this.state.loggedIn ? (
 									<Link to="/logout">Log out</Link>
-								) : (
+							) : (
 									<Link to="/login">Sign in</Link>
-								)}
-							</li>
-							<li><Link to="/register"   >/ register</Link></li>
-
-						</ul>
-					</button>
+							)}
+						</li>
+						<li><Link to="/register"   >/ register</Link></li>
+					</ul>
 				</div>
 			</nav>
 		)

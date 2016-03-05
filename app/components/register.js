@@ -6,35 +6,42 @@ import React from 'react';
 import {render} from 'react-dom';
 
 var Register = React.createClass({
+	getInitialState() {
+		return {}
+	},
+
+	handleSubmit(event) {
+		event.preventDefault()
+	},
 	render() {
-		return <form method="POST" action="/auth/register">
+		return <form>
+						<fieldset>
+							<section>
+								<label htmlFor="name">Name</label>
+								<input type="text" id="name" value=""/>
+							</section>
 
-						<div>
-							<label htmlFor="name">Name</label>
-							<input type="text" id="name" value=""/>
-						</div>
+							<section>
+								<label htmlFor="email">Emai</label>
+								<input type="email" id="email" value=""/>
+							</section>
 
-						<div>
-							<label htmlFor="email">Emai</label>
-							<input type="email" id="email" value=""/>
-						</div>
-
-						<div>
-							<label htmlFor="password">Password</label>
-							<input type="password" id="password"/>
-						</div>
+							<section>
+								<label htmlFor="password">Password</label>
+								<input type="password" id="password"/>
+							</section>
 
 
-						<div>
-							<label htmlFor="password_confirmation"> Confirm Password</label>
-							<input type="password" id="password_confirmation"/>
-						</div>
+							<section>
+								<label htmlFor="password_confirmation"> Confirm Password</label>
+								<input type="password" id="password_confirmation"/>
+							</section>
 
-						<div>
-							<button type="submit">Register</button>
-						</div>
+							<section>
+								<button type="submit" onClick={this.handleSubmit}>Register</button>
+							</section>
+						</fieldset>
 				</form>
-
 			}
 })
 
