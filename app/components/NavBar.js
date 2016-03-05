@@ -33,7 +33,7 @@ var NavBar = React.createClass({
 							{this.state.loggedIn ? (
 									<Link to="/logout">Log out</Link>
 							) : (
-									<Link to="/login">Sign in</Link>
+									<Link to="/login">Log in</Link>
 							)}
 						</li>
 						<li><Link to="/register"   >register</Link></li>

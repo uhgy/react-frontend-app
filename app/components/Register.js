@@ -14,34 +14,34 @@ var Register = React.createClass({
 		event.preventDefault()
 	},
 	render() {
-		return <form>
-			<fieldset>
-				<section>
-					<label htmlFor="name">Name</label>
-					<input type="text" id="name" value=""/>
-				</section>
+		return <form className="register" onSubmit={this.handleSubmit}>
+						<fieldset>
+							<section>
+								<label htmlFor="name">Name</label>
+								<input type="text" id="name" value=""/>
+							</section>
 
-				<section>
-					<label htmlFor="email">Emai</label>
-					<input type="email" id="email" value=""/>
-				</section>
+							<section>
+								<label htmlFor="email">Emai</label>
+								<input type="email" id="email" value=""/>
+							</section>
 
-				<section>
-					<label htmlFor="password">Password</label>
-					<input type="password" id="password"/>
-				</section>
+							<section>
+								<label htmlFor="password">Password</label>
+								<input type="password" id="password"/>
+							</section>
 
 
-				<section>
-					<label htmlFor="password_confirmation"> Confirm Password</label>
-					<input type="password" id="password_confirmation"/>
-				</section>
+							<section>
+								<label htmlFor="password_confirmation"> Confirm Password</label>
+								<input type="password" id="password_confirmation"/>
+							</section>
 
-				<section>
-					<button type="submit" onClick={this.handleSubmit}>Register</button>
-				</section>
-			</fieldset>
-		</form>
+							<section>
+								<button type="submit">Register</button>
+							</section>
+						</fieldset>
+					</form>
 	}
 })
 

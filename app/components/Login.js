@@ -3,6 +3,7 @@
  */
 import React from 'react';
 import {render} from 'react-dom';
+import {Link} from 'react-router';
 import auth from './../auth';
 
 
@@ -42,22 +43,30 @@ var Login = React.createClass({
 
 	render() {
 		return (
-			<form onSubmit={this.handleSubmit}>
-
-				<label htmlFor="email">Emai</label>
-				<input type="email" ref="email" id="email" defaultValue="joe@example.com"/>
-
-				<label htmlFor="password">Password</label>
-				<input type="password" ref="password" id="password"/>(hint: password1)
-
-				<input type="checkbox" id="remember"/>
-				<label htmlFor="remember"> Remember Me</label>
-
-				<button type="submit">Login</button>
-
-				{this.state.error && (
-						<p>Bad login information</p>
-				)}
+			<form className="login" onSubmit={this.handleSubmit}>
+				<fieldset>
+					<section>
+						<label htmlFor="email">Emai</label>
+						<input type="email" ref="email" id="email" defaultValue="joe@example.com"/>
+					</section>
+					<section>
+						<label htmlFor="password">Password</label>
+						<input type="password" ref="password" id="password"/>
+						<p className="hint">(hint: password1)</p>
+					</section>
+					<section>
+						<label htmlFor="remember"> Remember Me</label>
+						<input type="checkbox" className="remember-me" id="remember"/>
+						<p>keep me logged in</p>
+					</section>
+					<section>
+						<button type="submit">Login</button>
+						<p>Not Signed up? <Link to="/register">Register now!</Link></p>
+					</section>
+					{this.state.error && (
+							<p>Bad login information</p>
+					)}
+				</fieldset>
 			</form>
 		)
 	}
