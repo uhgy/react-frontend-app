@@ -19,13 +19,15 @@ var NavBar = React.createClass({
 	},
 	render() {
 		return (
-			<nav className="">
-				<div className="navbar navbar-collapse">
-					<ul className="nav nav-tabs">
-						<li><IndexLink to="/"   >/ Home</IndexLink></li>
-						<li><Link to="/article"   >/ Articles</Link></li>
-						<li><Link to="/create/article"   >/ Create Article</Link></li>
+			<header>
+				<h1><Link to="/">Home</Link></h1>
+				<nav className="menu">
+					<ul>
+						<li><Link to="/article">Articles</Link></li>
+						<li><Link to="/create/article">Create Article</Link></li>
 					</ul>
+				</nav>
+				<section className="login">
 					<ul>
 						<li>
 							{this.state.loggedIn ? (
@@ -34,10 +36,10 @@ var NavBar = React.createClass({
 									<Link to="/login">Sign in</Link>
 							)}
 						</li>
-						<li><Link to="/register"   >/ register</Link></li>
+						<li><Link to="/register"   >register</Link></li>
 					</ul>
-				</div>
-			</nav>
+			</section>
+			</header>
 		)
 	}
 })

@@ -1,2 +1,83 @@
-@import '../node_modules/bootstrap/less/bootstrap';
+//@import '../node_modules/bootstrap/less/bootstrap';
 
+* {
+  margin:0; padding:0;
+}
+
+body {
+  background:#efefef;
+}
+
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style-type: none;
+}
+
+div#app {
+  width:98%;
+}
+
+header {
+  height: 70px;
+  margin: 10px;
+  border-width: 1px;
+  box-shadow: 0 12px 8px -9px;
+  background: #FFFFFF;
+  border-radius: 20px;
+  h1 {
+    width: 100px;
+    float: left;
+    margin: 14px;
+    border: 1px solid;
+  }
+  nav.menu {
+    margin:12px 0;
+    border: 1px solid;
+    float: left;
+    ul {
+      display: inline-block;
+    }
+    li {
+      position:relative;
+      float: left;
+      margin: 10px 10px;
+
+      &:nth-child(1) > a {
+        display: block;
+        background: #337ab7;
+      }
+      &:nth-child(2) > a {
+        display: block;
+        background: #fff000;
+      }
+      &:nth-child(3) > a {
+        display: block;
+        background: #000fff;
+      }
+    }
+
+  }
+  section.login {
+    float: right;
+    margin: 10px 10px;
+    li {
+      position:relative;
+      float: right;
+      margin: 10px 10px;
+
+      &:nth-child(1) > a {
+        display: block;
+        background: #337ab7;
+      }
+      &:nth-child(2) > a {
+        display: block;
+        background: #fff000;
+      }
+    }
+  }
+
+
+}
