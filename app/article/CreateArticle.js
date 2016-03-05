@@ -31,7 +31,8 @@ var CreateArticle = React.createClass({
 		}
 		requestApi.storeArticle(article).pipe(
 				function(data) {
-					console.log(data)
+					//console.log(data)
+
 				}
 		)
 	},
@@ -47,7 +48,7 @@ var CreateArticle = React.createClass({
 					<input type="text" id="introduction" value={this.state.introduction} onChange={this.handleChange.bind(this, 'introduction')}/>
 
 					<label htmlFor="content">Content</label>
-					<input type="text" id="content" value={this.state.content} onChange={this.handleChange.bind(this, 'content')}/>
+					<textarea id="content" value={this.state.content} onChange={this.handleChange.bind(this, 'content')}/>
 
 					<input type="button" value="submit" onClick={this.handleSubmit}/>
 				</form>

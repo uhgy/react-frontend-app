@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-module.exports = {
+var auth = {
 
 	//postLogin(data) {
 	//	$.ajax({
@@ -57,6 +57,8 @@ module.exports = {
 
 	onChange() {}
 }
+
+export default auth;
 
 function pretendRequest(email, pass, cb) {
 	setTimeout(() => {

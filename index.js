@@ -9,7 +9,7 @@ var config = require('./server.config');
 app.set('port', process.env.PORT || 3000);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-//console.log(config.env_mode);
+console.log(config.env_mode);
 if(config.env_mode == 'dev'){
 	app.use(express.static(path.join(__dirname, 'build')));
 }else if(config.env_mode == 'deploy' || config.env_mode == 'production'){
@@ -34,7 +34,7 @@ app.use('/api', function (req, res) {
 				form: req.body
 			}, function (error, response, body) {
 				if (!error && response.statusCode == 200) {
-					//res.send(body)
+					res.send(body)
 					//console.log(response)
 				}
 			});

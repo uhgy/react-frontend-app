@@ -4,7 +4,6 @@
 import React from 'react';
 import {render} from 'react-dom';
 import auth from './auth';
-import './login.less';
 
 
 var Login = React.createClass({
@@ -24,21 +23,21 @@ var Login = React.createClass({
 
 		const email = this.refs.email.value
 		const pass = this.refs.password.value
-		var data = {email: email, password: pass};
-		auth.postLogin(data)
+		//var data = {email: email, password: pass};
+		//auth.postLogin(data)
 
-		//auth.login(email, pass, (loggedIn) => {
-		//	if (!loggedIn)
-		//		return this.setState({ error: true })
-		//
-		//	const { location } = this.props
-		//
-		//	if (location.state && location.state.nextPathname) {
-		//		this.context.router.replace(location.state.nextPathname)
-		//	} else {
-		//		this.context.router.replace('/')
-		//	}
-		//})
+		auth.login(email, pass, (loggedIn) => {
+			if (!loggedIn)
+				return this.setState({ error: true })
+
+			const { location } = this.props
+
+			if (location.state && location.state.nextPathname) {
+				this.context.router.replace(location.state.nextPathname)
+			} else {
+				this.context.router.replace('/')
+			}
+		})
 	},
 
 	render() {
