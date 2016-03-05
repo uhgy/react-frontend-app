@@ -4,9 +4,8 @@
 
 import React from 'react';
 import {render} from 'react-dom';
-import './login.less';
 
-export default class Register extends React.Component {
+var Register = React.createClass({
 	render() {
 		return <form method="POST" action="/auth/register">
 
@@ -37,4 +36,6 @@ export default class Register extends React.Component {
 				</form>
 
 			}
-}
+})
+
+export default Register;

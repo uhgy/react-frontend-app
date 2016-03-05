@@ -4,8 +4,8 @@
 
 import React from 'react';
 import {render} from 'react-dom';
-import auth from './auth/auth';
-import Login from './auth/login';
+import auth from './../auth';
+import Login from './Login';
 import NavBar from './NavBar';
 import Footer from './Footer';
 

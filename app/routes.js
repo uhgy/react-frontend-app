@@ -3,15 +3,15 @@
  */
 import React from 'react';
 import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'react-router';
-import auth from './auth/auth';
-import ArticleList from './article/ArticleList';
-import Article from './article/Article';
-import CreateArticle from './article/CreateArticle';
-import Register from './auth/register';
-import Login from './auth/login';
-import App from './App';
-import Home from './Home';
-import Logout from './Logout';
+import auth from './auth';
+import ArticleList from './components/ArticleList';
+import Article from './components/Article';
+import CreateArticle from './components/CreateArticle';
+import Register from './components/Register';
+import Login from './components/Login';
+import App from './components/App';
+import Home from './components/Home';
+import Logout from './components/Logout';
 
 
 

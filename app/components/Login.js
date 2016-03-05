@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import {render} from 'react-dom';
-import auth from './auth';
+import auth from './../auth';
 
 
 var Login = React.createClass({
