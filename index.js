@@ -9,7 +9,7 @@ var config = require('./server.config');
 app.set('port', process.env.PORT || 3000);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-console.log(config.env_mode);
+console.log(config);
 if(config.env_mode == 'dev'){
 	app.use(express.static(path.join(__dirname, 'build')));
 }else if(config.env_mode == 'deploy' || config.env_mode == 'production'){
