@@ -5,6 +5,10 @@ import React from 'react';
 import {render} from 'react-dom';
 import {Link, IndexLink} from 'react-router';
 
+var styles = {
+
+};
+
 var NavBar = React.createClass({
 	getInitialState() {
 		return {}
@@ -15,7 +19,7 @@ var NavBar = React.createClass({
 	},
 	render() {
 		return (
-			<nav className="navbar navbar-default navbar-static-top">
+			<nav className="">
 				<div className="navbar navbar-collapse">
 					<ul className="nav nav-tabs">
 						<li><IndexLink to="/"   >/ Home</IndexLink></li>
