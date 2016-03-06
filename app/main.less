@@ -1,5 +1,8 @@
 //@import '../node_modules/bootstrap/less/bootstrap';
 
+
+@width: 98%;
+
 * {
   margin:0; padding:0;
 }
@@ -17,12 +20,18 @@ li {
 }
 
 div#app {
-  width:98%;
+  width:@width;
+  margin: 0 auto;
 }
 
+
+
 header {
+  position: fixed;
+  top:0;
+  width: @width;
   height: 5em;
-  margin: .8em;
+  border:1px solid;
   border-width: .08em;
   box-shadow: -.5em .5em .5em -.5em;
   background: #FFFFFF;
@@ -81,14 +90,11 @@ header {
 }
 
 footer {
-  //height: 3em;
-  margin: .7em;
+  overflow: hidden;
   border-width: .08em;
   box-shadow: 0 .1em .1em -.05em;
   background: #FFFFFF;
   border-radius: 0 .4em;
-  float:left;
-  width:98%;
   font-size:.9em;
   div {
     margin: 1.5em;
@@ -156,6 +162,10 @@ form.register, form.login {
       background-color: #FFFFFF;
     }
   }
+}
+header + div {
+  margin-top: 7em;
+  clear:both;
 }
 
 form.register {

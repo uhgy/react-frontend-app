@@ -31,8 +31,9 @@ var App = React.createClass({
 		return (
 			<div>
 				<NavBar/>
-
-				{this.props.children || <p>You are {!this.state.loggedIn && 'not'} logged in.</p>}
+				<div>
+					{this.props.children || <p>You are {!this.state.loggedIn && 'not'} logged in.</p>}
+				</div>
 				<Footer/>
 			</div>
 		)
