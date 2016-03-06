@@ -17,6 +17,9 @@ var CreateArticle = React.createClass({
 	componentWillMount() {
 
 	},
+	/*
+	  handleChange 分别绑定了title,introduction,content输入框
+	 */
 
 	handleChange(name, event) {
 		var newState = {}
