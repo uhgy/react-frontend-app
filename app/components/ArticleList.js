@@ -6,14 +6,14 @@ import {render} from 'react-dom';
 import {Link} from 'react-router';
 import requestApi from '../request';
 
-var styles = {};
-
-styles.inner = {
-	margin: '10px',
-	border: '1px',
-	background: '#999',
-	textAlign: 'center'
-}
+//var styles = {};
+//
+//styles.inner = {
+//	margin: '10px',
+//	border: '1px',
+//	background: '#999',
+//	textAlign: 'center'
+//}
 
 var ArticleList = React.createClass({
 	getInitialState() {
@@ -33,19 +33,17 @@ var ArticleList = React.createClass({
 	render() {
 		//console.log(this.state.articles)
 		return (
-			<section id="article_area">
+			<section className="article-list">
 				{this.state.articles.map(function (article) {
 					return (
 						<article key={article.id}>
-							<div style={styles.inner}>
-								<h3>{article.title}</h3>
-								<p>
-									{article.introduction}
-									{article.published_at}
-								</p>
-								<p>{article.content}</p>
+							<section>
+								<div>Title:<strong>{article.title}</strong></div>
+								<div>introduction:{article.introduction}</div>
+								<div>published_at:<em>{article.published_at}</em></div>
+							</section>
+								<section>{article.content}</section>
 								<Link to={`article/${article.id}`}>more</Link>
-							</div>
 						</article>
 					)
 				})

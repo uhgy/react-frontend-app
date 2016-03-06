@@ -4,6 +4,7 @@
 
 import React from 'react';
 import {render} from 'react-dom';
+import auth from './../auth';
 
 var Logout = React.createClass({
 	componentDidMount() {

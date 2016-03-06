@@ -10,6 +10,7 @@ import NavBar from './NavBar';
 import Footer from './Footer';
 
 var App = React.createClass({
+
 	getInitialState() {
 		return {
 			loggedIn: auth.loggedIn()

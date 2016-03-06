@@ -56,6 +56,6 @@ app.get('/', function (req, res) {
 	res.render('index');
 });
 
-app.listen(app.get('port'), function () {
+app.listen(app.get('port'), "0.0.0.0", function () {
 	console.log('Example app listening on port 3000!');
 });

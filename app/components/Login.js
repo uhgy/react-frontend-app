@@ -24,10 +24,9 @@ var Login = React.createClass({
 
 		const email = this.refs.email.value
 		const pass = this.refs.password.value
-		//var data = {email: email, password: pass};
-		//auth.postLogin(data)
 
 		auth.login(email, pass, (loggedIn) => {
+			console.log(loggedIn)
 			if (!loggedIn)
 				return this.setState({ error: true })
 

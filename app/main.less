@@ -3,6 +3,7 @@
 
 @width: 98%;
 
+
 * {
   margin:0; padding:0;
 }
@@ -20,6 +21,13 @@ li {
   a {
     display: block;
   }
+}
+
+button {
+  width:6em;
+  display:block;
+  height:2em;
+  background-color: #FFFFFF;
 }
 
 div#app {
@@ -58,15 +66,24 @@ header {
     li {
       float:left;
       position:relative;
-      a {
+      &:nth-child(2) > a {
         padding: .25em .25em;
-      }
-
-      &:nth-child(1) > a {
         background: #337ab7;
       }
-      &:nth-child(2) > a {
-        background: #fff000;
+      &:nth-child(3) > a {
+        padding: .25em .25em;
+        background: #5cb85c;
+      }
+
+      li {
+        clear: both;
+        width: 5em;
+        &:nth-child(1) > a {
+          background: #5bc0de;
+        }
+        &:nth-child(2) > a {
+          background: #f0ad4e;
+        }
       }
     }
 
@@ -74,9 +91,10 @@ header {
   section.login {
     float: right;
     margin: 1.2em .5em;
+    width: 5em;
     li {
       position:relative;
-      float: left;
+
       a {
         padding: .25em .25em;
       }
@@ -87,7 +105,7 @@ header {
         background: #fff000;
       }
       &:nth-child(3) > a {
-        background: #999;
+        background: #d9534f;
       }
     }
   }
@@ -179,12 +197,12 @@ form.register, form.login {
       width: 12em;
       margin-right: 4em;
     }
-    button {
-      width:6em;
-      display:block;
-      height:2em;
-      background-color: #FFFFFF;
-    }
+    //button {
+    //  width:6em;
+    //  display:block;
+    //  height:2em;
+    //  background-color: #FFFFFF;
+    //}
   }
 }
 
@@ -214,20 +232,64 @@ form.login {
 /*
 CreateArticle component
 */
-.article-form-area {
+.article-form {
   section {
-    height:1.5em;
+    overflow:hidden;
+    margin: 1em 0;
+    //float: left;
+    //width: 100%;
+
     label {
-      margin-left: 5em;
+      float: left;
+      width:10em;
+      text-align:center;
     }
     input {
-      float:right;
-      margin-right: 5em;
+      display: block;
+      margin: 0 auto;
+      width: 15em;
+    }
+    textarea {
+      display: block;
+      margin: 0 auto;
+      width: 40em;
+      height:30em;
+    }
+    button {
+      margin: 0 auto;
+    }
+  }
+}
+
+/*
+ArticleList component
+*/
+
+.article-list {
+  article {
+    overflow: hidden;
+    margin: 1em auto;
+    background: #999;
+    section {
+      display: block;
+      width: 100%;
+      overflow: hidden;
+      margin: 1em auto;
+    }
+    div {
+      border: 1px solid;
+      float: left;
+      margin: 1em;
+    }
+    h3 {
+      width: 10em;
     }
 
   }
 
+
 }
+
 
 
 @media only screen and (max-width:640px) {

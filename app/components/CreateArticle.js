@@ -1,6 +1,6 @@
 import React from 'react';
 import {render} from 'react-dom';
-import {Link} from 'react-router';
+import {browserHistory, Link} from 'react-router';
 import requestApi from '../request';
 
 var CreateArticle = React.createClass({
@@ -9,7 +9,8 @@ var CreateArticle = React.createClass({
 				title: "",
 				title2: "",
 				introduction: "",
-				content: ""
+				content: "",
+				created: false
 		}
 	},
 
@@ -19,11 +20,12 @@ var CreateArticle = React.createClass({
 
 	handleChange(name, event) {
 		var newState = {}
-		newState[name] = event.target.value;
+		newState[name] = event.target.value
 		this.setState(newState)
 	},
 
-	handleSubmit() {
+	handleSubmit(event) {
+		event.preventDefault()
 		var article = {
 			'title': this.state.title,
 			'introduction': this.state.introduction,
@@ -31,37 +33,45 @@ var CreateArticle = React.createClass({
 		}
 		requestApi.storeArticle(article).pipe(
 				function(data) {
-					//console.log(data)
+					var data = JSON.parse(data)
+					if(data && data['meta'] && data['meta']['code'] == 200) {
+						this.setState({created: true})
+						browserHistory.push('/article')
+					}else {
+						this.setState({created: false})
+					}
 
-				}
+				}.bind(this)
 		)
 	},
 
 	render() {
 		return (
 			<section>
-				<article>
-					<h2>Create a New Article</h2>
-					<form className="article-form">
-						<fieldset>
-							<section>
-								<label htmlFor="title">Title</label>
-								<input type="text" id="title" value={this.state.title} onChange={this.handleChange.bind(this, 'title')}/>
-							</section>
-							<section>
-								<label htmlFor="introduction">Introduction</label>
-								<input type="text" id="introduction" value={this.state.introduction} onChange={this.handleChange.bind(this, 'introduction')}/>
-							</section>
-							<section>
-								<label htmlFor="content">Content</label>
-								<textarea id="content" value={this.state.content} onChange={this.handleChange.bind(this, 'content')}/>
-							</section>
-							<section>
-								<input type="button" value="submit" onClick={this.handleSubmit}/>
-							</section>
-						</fieldset>
-					</form>
-				</article>
+				{this.state.created ? (<p>Success</p>) : (
+					<article>
+						<h2>Create a New Article</h2>
+						<form className="article-form">
+							<fieldset>
+								<section>
+									<label htmlFor="title">Title</label>
+									<input type="text" id="title" value={this.state.title} onChange={this.handleChange.bind(this, 'title')}/>
+								</section>
+								<section>
+									<label htmlFor="introduction">Introduction</label>
+									<input type="text" id="introduction" value={this.state.introduction} onChange={this.handleChange.bind(this, 'introduction')}/>
+								</section>
+								<section>
+									<label htmlFor="content">Content</label>
+									<textarea id="content" value={this.state.content} onChange={this.handleChange.bind(this, 'content')}/>
+								</section>
+								<section>
+									<button value="submit" onClick={this.handleSubmit}>提交</button>
+								</section>
+							</fieldset>
+						</form>
+					</article>
+				)}
 			</section>
 		)
 	}
