@@ -74,17 +74,44 @@ header {
         padding: .25em .25em;
         background: #5cb85c;
       }
+      &:hover > a {
+        color:#555;
+        border-color:#fff;
+        border:.2em;
+      }
+      &:hover > ul {
+        opacity:1;
+        visibility: visible;
+      }
 
-      li {
-        clear: both;
-        width: 5em;
-        &:nth-child(1) > a {
-          background: #5bc0de;
-        }
-        &:nth-child(2) > a {
-          background: #f0ad4e;
+
+      ul {
+        opacity:0;
+        visibility:hidden;
+        position:absolute;
+        width:5em;
+        left:0;
+        top:100%;
+        -webkit-transition: 1s all;
+        -moz-transition: 1s all;
+        -ms-transition: 1s all;
+        -o-transition: 1s all;
+        transition: 1s all;
+
+        li {
+          float:none;
+          &:nth-child(1) > a {
+            background: #5bc0de;
+          }
+          &:nth-child(2) > a {
+            background: #f0ad4e;
+          }
         }
       }
+
+
+
+
     }
 
   }
@@ -94,7 +121,6 @@ header {
     width: 5em;
     li {
       position:relative;
-
       a {
         padding: .25em .25em;
       }
