@@ -6,8 +6,8 @@ import {render} from 'react-dom';
 import {Link} from 'react-router';
 import requestApi from '../request';
 
-//var styles = {};
-//
+var styles = {};
+
 //styles.inner = {
 //	margin: '10px',
 //	border: '1px',
@@ -15,9 +15,24 @@ import requestApi from '../request';
 //	textAlign: 'center'
 //}
 
+styles.toTop = {
+	position: 'fixed',
+	display: 'block',
+	width: '2em',
+	height: '2em',
+	bottom: '4em',
+	right: '.5em',
+	zIndex: '2',
+	backgroundColor: '#f0ad4e'
+}
+
 var ArticleList = React.createClass({
 	getInitialState() {
-		return {articles: []}
+		return {
+			articles: [],
+			isTop: true,
+			timer: null
+		}
 	},
 
 	componentWillMount() {
@@ -29,9 +44,28 @@ var ArticleList = React.createClass({
 		)
 	},
 
+	handleToTop(event) {
+		var clientHeight = document.documentElement.clientHeight;
+		var osTop = document.documentElement.scrollTop || document.body.scrollTop;
+
+		window.onscroll = function() {
+			if (osTop >= clientHeight){
+				obtn.style.display = 'block';
+			}else {
+				obtn.style.display = 'none';
+			}
+
+			if(!isTop){
+				clearInterval(timer);
+			}
+			isTop = false;
+		}
+
+
+	},
+
 
 	render() {
-		//console.log(this.state.articles)
 		return (
 			<section className="article-list">
 				{this.state.articles.map(function (article) {
@@ -42,13 +76,13 @@ var ArticleList = React.createClass({
 								<div>introduction:{article.introduction}</div>
 								<div>published_at:<em>{article.published_at}</em></div>
 							</section>
-								<section>{article.content}</section>
-								<Link to={`article/${article.id}`}>more</Link>
+							<section>{article.content}</section>
+							<Link to={`article/${article.id}`}>more</Link>
 						</article>
 					)
 				})
 				}
-				{this.props.children}
+				<div style={styles.toTop} onClick={this.handleToTop}>回到顶部</div>
 			</section>
 		)
 	}
