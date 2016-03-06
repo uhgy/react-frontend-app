@@ -46,7 +46,7 @@ var Login = React.createClass({
 			<form className="login" onSubmit={this.handleSubmit}>
 				<fieldset>
 					<section>
-						<label htmlFor="email">Emai</label>
+						<label htmlFor="email">Email</label>
 						<input type="email" ref="email" id="email" defaultValue="joe@example.com"/>
 					</section>
 					<section>
@@ -54,10 +54,10 @@ var Login = React.createClass({
 						<input type="password" ref="password" id="password"/>
 						<p className="hint">(hint: password1)</p>
 					</section>
-					<section>
-						<label htmlFor="remember"> Remember Me</label>
-						<input type="checkbox" className="remember-me" id="remember"/>
-						<p>keep me logged in</p>
+					<section className="remember-me">
+						<p>Remember Me</p>
+						<input type="checkbox" id="remember"/>
+						<label htmlFor="remember">keep me logged in</label>
 					</section>
 					<section>
 						<button type="submit">Login</button>

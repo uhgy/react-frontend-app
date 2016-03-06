@@ -21,21 +21,21 @@ div#app {
 }
 
 header {
-  height: 70px;
-  margin: 10px;
-  border-width: 1px;
-  box-shadow: 0 12px 8px -9px;
+  height: 5em;
+  margin: .8em;
+  border-width: .08em;
+  box-shadow: -.5em .5em .5em -.5em;
   background: #FFFFFF;
-  border-radius: 20px;
+  border-radius: .4em;
   h1 {
-    width: 100px;
+    width: 3em;
     float: left;
-    margin: 14px;
-    border: 1px solid;
+    margin: .5em;
+    border: .04em solid;
   }
   nav.menu {
-    margin:12px 0;
-    border: 1px solid;
+    margin:.8em 0;
+    border: .08em solid;
     float: left;
     ul {
       display: inline-block;
@@ -43,7 +43,7 @@ header {
     li {
       position:relative;
       float: left;
-      margin: 10px 10px;
+      margin: .7em;
 
       &:nth-child(1) > a {
         display: block;
@@ -62,11 +62,11 @@ header {
   }
   section.login {
     float: right;
-    margin: 10px 10px;
+    margin: .8em;
     li {
       position:relative;
       float: left;
-      margin: 10px 10px;
+      margin: .8em;
 
       &:nth-child(1) > a {
         display: block;
@@ -80,71 +80,148 @@ header {
   }
 }
 
+footer {
+  //height: 3em;
+  margin: .7em;
+  border-width: .08em;
+  box-shadow: 0 .1em .1em -.05em;
+  background: #FFFFFF;
+  border-radius: 0 .4em;
+  float:left;
+  width:98%;
+  font-size:.9em;
+  div {
+    margin: 1.5em;
+    float: left;
+  }
+  nav{
+    margin: 1.5em;
+    float:right;
+    li {
+      margin: 0 .8em;
+      float: left;
+    }
+  }
+
+}
+
 
 form.register, form.login {
-  margin: 0 auto 10%;
-  width:50%;
+  margin: 0 auto;
+  width:25em;
   fieldset {
     border-radius: 10px;
   }
-
-
   section {
-    margin:10px 0;
-    height: 30px;
+    margin:.7em 0;
+    height: 2.3em;
+    //overflow: hidden;
+    &.remember-me {
+      p {
+        float: left;
+        margin-left:10%;
+        height:1.2em;
+        width:30%;
+      }
+      input {
+        //display: inline-block;
+        //margin:.3em 16em 0 0;
+        width:1em;
+
+        float: right;
+      }
+      label {
+        float: right;
+        margin-right: 4em;
+        width: 12em;
+      }
+    }
     label {
       float: left;
       margin-left:10%;
-      height:19px;
+      height:1.2em;
       width:30%;
     }
     input {
-      float:right;
-      width:40%;
-      margin-right: 10%;
+      float: right;
+      width: 12em;
+      margin-right: 4em;
     }
+
     button {
-      width:100px;
+      width:6em;
       display:block;
-      height:30px;
-      margin: auto;
-      border-radius: 5px;
+      height:2em;
+      border-radius: 3em;
       background-color: #FFFFFF;
     }
   }
 }
 
+form.register {
+
+  button {
+    margin: 0 auto;
+  }
+}
+
 form.login {
   p.hint {
-    float:right;
+    clear:both;
+    text-align: right;
     margin-right: 10%;
   }
-  input.remember-me {
+
+  button {
+    float:left;
+
+  }
+
+}
+
+@media only screen and (max-width:640px) {
+  header {
+
+  }
+  footer {
+    div{
+      text-align: center;
+      margin: 0 auto;
+      float: none;
+      padding: .5em 0 .3em 0;
+    }
+    nav {
+      padding: .2em 0 .5em 0;
+      margin: 0 auto;
+      float: none;
+      overflow: hidden;
+      width: 18em;
+    }
     
   }
 }
 
 
-footer {
-  height: 70px;
-  margin: 10px;
-  border-width: 1px;
-  box-shadow: 0 12px 8px -9px;
-  background: #FFFFFF;
-  border-radius: 20px;
-  div {
-    margin: 20px;
-    height: 50px;
-    float: left;
-    width:50%;
-  }
-  nav{
-    margin:10px;
-    float:right;
-    li {
-      margin: 10px;
-      float: left;
-    }
-  }
+@media only screen
+and (min-device-width: 414px)
+and (max-device-width: 736px)
+and (orientation : landscape) {
+  header {
 
+  }
+  footer {
+
+  }
+}
+
+@media only screen
+and (min-device-width: 414px)
+and (max-device-width: 736px)
+and (orientation : portrait) {
+  header {
+
+  }
+  footer {
+
+  }
 }
