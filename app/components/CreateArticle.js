@@ -39,20 +39,30 @@ var CreateArticle = React.createClass({
 
 	render() {
 		return (
-			<article>
-				<form>
-					<label htmlFor="title">Title</label>
-					<input type="text" id="title" value={this.state.title} onChange={this.handleChange.bind(this, 'title')}/>
-
-					<label htmlFor="introduction">Introduction</label>
-					<input type="text" id="introduction" value={this.state.introduction} onChange={this.handleChange.bind(this, 'introduction')}/>
-
-					<label htmlFor="content">Content</label>
-					<textarea id="content" value={this.state.content} onChange={this.handleChange.bind(this, 'content')}/>
-
-					<input type="button" value="submit" onClick={this.handleSubmit}/>
-				</form>
-			</article>
+			<section>
+				<article>
+					<h2>Create a New Article</h2>
+					<form className="article-form">
+						<fieldset>
+							<section>
+								<label htmlFor="title">Title</label>
+								<input type="text" id="title" value={this.state.title} onChange={this.handleChange.bind(this, 'title')}/>
+							</section>
+							<section>
+								<label htmlFor="introduction">Introduction</label>
+								<input type="text" id="introduction" value={this.state.introduction} onChange={this.handleChange.bind(this, 'introduction')}/>
+							</section>
+							<section>
+								<label htmlFor="content">Content</label>
+								<textarea id="content" value={this.state.content} onChange={this.handleChange.bind(this, 'content')}/>
+							</section>
+							<section>
+								<input type="button" value="submit" onClick={this.handleSubmit}/>
+							</section>
+						</fieldset>
+					</form>
+				</article>
+			</section>
 		)
 	}
 })

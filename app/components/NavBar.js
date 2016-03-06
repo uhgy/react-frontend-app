@@ -22,12 +22,14 @@ var NavBar = React.createClass({
 			<header>
 				<h1><Link to="/">Home</Link></h1>
 				<nav className="menu">
+					<Link to="/" className="menu-ctrl"></Link>
 					<ul>
 						<li><Link to="/article">Articles</Link></li>
 						<li><Link to="/create/article">Create Article</Link></li>
 					</ul>
 				</nav>
 				<section className="login">
+					<Link to="/" className="login-ctrl"></Link>
 					<ul>
 						<li>
 							{this.state.loggedIn ? (
@@ -37,6 +39,7 @@ var NavBar = React.createClass({
 							)}
 						</li>
 						<li><Link to="/register"   >register</Link></li>
+						<li><Link to="/"   >change password</Link></li>
 					</ul>
 			</section>
 			</header>
