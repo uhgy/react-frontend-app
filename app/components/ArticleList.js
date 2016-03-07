@@ -15,6 +15,10 @@ var styles = {};
 //	textAlign: 'center'
 //}
 
+
+/*
+  回到顶部按钮
+ */
 styles.toTop = {
 	position: 'fixed',
 	display: 'block',
@@ -23,6 +27,7 @@ styles.toTop = {
 	bottom: '4em',
 	right: '.5em',
 	zIndex: '2',
+	cursor: 'pointer',
 	backgroundColor: '#f0ad4e'
 }
 
@@ -31,39 +36,59 @@ var ArticleList = React.createClass({
 		return {
 			articles: [],
 			isTop: true,
-			timer: null
+			timer: null,
+			firstScreen: true
 		}
 	},
 
 	componentWillMount() {
+		/*
+		向后端发请求获取article列表
+		 */
 		requestApi.getArticles().pipe(
 			function(data){
 				var data = JSON.parse(data)
-				this.setState({ articles:data['data']['articles'] })
+				this.setState({ articles: data['data']['articles'] })
 			}.bind(this)
 		)
-	},
 
-	handleToTop(event) {
-		var clientHeight = document.documentElement.clientHeight;
-		var osTop = document.documentElement.scrollTop || document.body.scrollTop;
-
+		/*
+		滚轮滑动时效果
+		 */
 		window.onscroll = function() {
+			var clientHeight = document.documentElement.clientHeight
+			var osTop = document.documentElement.scrollTop || document.body.scrollTop
 			if (osTop >= clientHeight){
-				obtn.style.display = 'block';
+				this.setState({firstScreen: false})
 			}else {
-				obtn.style.display = 'none';
+				this.setState({firstScreen: true})
+
 			}
 
-			if(!isTop){
-				clearInterval(timer);
+			if(!this.state.isTop){
+				clearInterval(this.state.timer)
 			}
-			isTop = false;
-		}
-
+			this.setState({isTop: false})
+			console.log(this.state)
+		}.bind(this)
 
 	},
 
+	/*
+	点击回到顶部按钮
+	 */
+	handleToTop(event) {
+		var timerVal = setInterval(function() {
+			this.setState({isTop: true})
+			var osTop = document.documentElement.scrollTop || document.body.scrollTop
+			var ispeed = Math.floor(-osTop / 10)
+			document.documentElement.scrollTop = document.body.scrollTop += ispeed
+			if (osTop == 0) {
+				clearInterval(this.state.timer);
+			}
+		}.bind(this))
+		this.setState({timer: timerVal})
+	},
 
 	render() {
 		return (
@@ -82,7 +107,7 @@ var ArticleList = React.createClass({
 					)
 				})
 				}
-				<div style={styles.toTop} onClick={this.handleToTop}>回到顶部</div>
+				<div style={this.state.firstScreen? {display:'none'} : styles.toTop} onClick={this.handleToTop}>回到顶部</div>
 			</section>
 		)
 	}
