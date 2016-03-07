@@ -33,21 +33,10 @@ var ArticleList = React.createClass({
 		}
 	},
 
-	componentWillMount() {
-		/*
-		向后端发请求获取article列表
-		 */
-		requestApi.getArticles().pipe(
-			function(data){
-				var data = JSON.parse(data)
-				this.setState({ articles: data['data']['articles'] })
-			}.bind(this)
-		)
-
-		/*
-		滚轮滑动时效果
-		 */
-		window.onscroll = function() {
+	/*
+	 滚轮滑动时效果
+	 */
+	onScrollToTop() {
 			var clientHeight = document.documentElement.clientHeight
 			var osTop = document.documentElement.scrollTop || document.body.scrollTop
 			if (osTop >= clientHeight){
@@ -61,9 +50,24 @@ var ArticleList = React.createClass({
 				clearInterval(this.state.timer)
 			}
 			this.setState({isTop: false})
-			console.log(this.state)
-		}.bind(this)
+	},
 
+
+	componentWillMount() {
+		/*
+		向后端发请求获取article列表
+		 */
+		requestApi.getArticles().pipe(
+			function(data){
+				var data = JSON.parse(data)
+				this.setState({ articles: data['data']['articles'] })
+			}.bind(this)
+		)
+		window.addEventListener('scroll', this.onScrollToTop, false)
+	},
+
+	componentWillUnmount() {
+		window.removeEventListener('scroll', this.onScrollToTop, false)
 	},
 
 	/*
