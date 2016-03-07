@@ -8,14 +8,6 @@ import requestApi from '../request';
 
 var styles = {};
 
-//styles.inner = {
-//	margin: '10px',
-//	border: '1px',
-//	background: '#999',
-//	textAlign: 'center'
-//}
-
-
 /*
   回到顶部按钮
  */

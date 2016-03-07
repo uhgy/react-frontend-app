@@ -10,12 +10,21 @@ app.set('port', process.env.PORT || 3000);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 console.log(config);
+
+/*
+开发模式和线上模式
+ */
 if(config.env_mode == 'dev'){
 	app.use(express.static(path.join(__dirname, 'build')));
 }else if(config.env_mode == 'deploy' || config.env_mode == 'production'){
 	app.use(express.static(path.join(__dirname, 'dist')));
 }
 
+
+/*
+利用request向后端转发请求
+暂时只实现了GET和POST方法
+ */
 app.use('/api', function (req, res) {
 	//console.log(req);
 	switch(req.method) {
@@ -47,10 +56,6 @@ app.use('/api', function (req, res) {
 	}
 
 });
-
-app.post('/api', function(req, res) {
-
-})
 
 app.get('/', function (req, res) {
 	res.render('index');
