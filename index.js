@@ -2,6 +2,7 @@ var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
 var request = require('request');
+var rewrite = require('express-urlrewrite');
 var app = express();
 
 var config = require('./server.config');
@@ -12,6 +13,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 console.log(config);
 
 /*
+匹配不以'/api/'开头的路由
+*/
+app.use(rewrite(/^(?!\/api)\/*/, '/index.html'))
+/*
 开发模式和线上模式
  */
 if(config.env_mode == 'dev'){
@@ -19,6 +24,7 @@ if(config.env_mode == 'dev'){
 }else if(config.env_mode == 'deploy' || config.env_mode == 'production'){
 	app.use(express.static(path.join(__dirname, 'dist')));
 }
+
 
 
 /*
@@ -56,6 +62,7 @@ app.use('/api', function (req, res) {
 	}
 
 });
+
 
 app.get('/', function (req, res) {
 	res.render('index');
