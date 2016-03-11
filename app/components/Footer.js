@@ -9,7 +9,7 @@ var Footer = React.createClass({
 		return {}
 
 	},
-	componentWillMount() {
+	componentDidMount() {
 
 	},
 	render() {

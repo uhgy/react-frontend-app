@@ -33,7 +33,7 @@ if(config.env_mode == 'dev'){
 暂时只实现了GET和POST方法
  */
 app.use('/api', function (req, res) {
-	//console.log(req);
+	console.log(req);
 	switch(req.method) {
 		case 'GET':
 			request(config.backendAddress+req.path, function (error, response, body) {
@@ -46,7 +46,7 @@ app.use('/api', function (req, res) {
 				//console.log(req)
 			request({
 				url: config.backendAddress+req.path,
-				method: 'POST',
+				method: req.method,
 				form: req.body
 			}, function (error, response, body) {
 				if (!error && response.statusCode == 200) {
@@ -58,6 +58,16 @@ app.use('/api', function (req, res) {
 		case 'PUT':
 			break;
 		case 'DELETE':
+			console.log(req.method)
+			request({
+				url: config.backendAddress+req.path,
+				method: req.method,
+			}, function (error, response, body) {
+				if (!error && response.statusCode == 200) {
+					res.send(body)
+					//console.log(response)
+				}
+			});
 			break;
 		default: break;
 	}

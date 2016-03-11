@@ -10,7 +10,7 @@ var Home = React.createClass({
 		return {}
 
 	},
-	componentWillMount() {
+	componentDidMount() {
 
 	},
 	render() {

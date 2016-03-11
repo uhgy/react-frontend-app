@@ -11,7 +11,7 @@ var Article = React.createClass({
 		}
 	},
 
-	componentWillMount() {
+	componentDidMount() {
 		requestApi.getArticle(this.state.id).pipe(
 			function(data){
 				console.log(data)
@@ -28,6 +28,7 @@ var Article = React.createClass({
 				<h3>{article.title}</h3>
 				<p>{article.introduction} {article.published_at}</p>
 				<p>{article.content}</p>
+				<Link to={`/edit/article/${article.id}`}>edit Article</Link>
 			</article>
 		)
 	}

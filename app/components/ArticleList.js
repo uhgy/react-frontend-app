@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import {render} from 'react-dom';
-import {Link} from 'react-router';
+import {browserHistory, Link} from 'react-router';
 import requestApi from '../request';
 
 var styles = {};
@@ -29,7 +29,8 @@ var ArticleList = React.createClass({
 			articles: [],
 			isTop: true,
 			timer: null,
-			firstScreen: true
+			firstScreen: true,
+			fetchData: 'loading'
 		}
 	},
 
@@ -53,14 +54,17 @@ var ArticleList = React.createClass({
 	},
 
 
-	componentWillMount() {
+	componentDidMount() {
 		/*
 		向后端发请求获取article列表
 		 */
 		requestApi.getArticles().pipe(
 			function(data){
 				var data = JSON.parse(data)
-				this.setState({ articles: data['data']['articles'] })
+				this.setState({
+					articles: data['data']['articles'],
+					fetchData: 'done'
+				})
 			}.bind(this)
 		)
 		window.addEventListener('scroll', this.onScrollToTop, false)
@@ -68,6 +72,29 @@ var ArticleList = React.createClass({
 
 	componentWillUnmount() {
 		window.removeEventListener('scroll', this.onScrollToTop, false)
+	},
+
+	handleDeleteArticle(id) {
+		console.log(event)
+		console.log(id)
+		requestApi.deleteArticle(id).pipe(
+			function(data) {
+				var data = JSON.parse(data)
+				if (data && data['meta'] && data['meta']['code'] == 200) {
+					requestApi.getArticles().pipe(
+							function(data){
+								var data = JSON.parse(data)
+								this.setState({
+									articles: data['data']['articles'],
+									fetchData: 'done'
+								})
+							}.bind(this)
+					)
+				} else {
+
+				}
+			}.bind(this)
+		)
 	},
 
 	/*
@@ -87,6 +114,13 @@ var ArticleList = React.createClass({
 	},
 
 	render() {
+		if(this.state.articles.length === 0) {
+			if(this.state.fetchData === 'done') {
+				return <p>There is no articles!</p>
+			} else if(this.state.fetchData === 'loading') {
+				return <p>loading......</p>
+			}
+		}
 		return (
 			<section className="article-list">
 				{this.state.articles.map(function (article) {
@@ -98,11 +132,11 @@ var ArticleList = React.createClass({
 								<div>published_at:<em>{article.published_at}</em></div>
 							</section>
 							<section>{article.content}</section>
-							<Link to={`article/${article.id}`}>more</Link>
+							<Link to={`article/${article.id}`}>details</Link>
+							<input type="button" value="delete" onClick={this.handleDeleteArticle.bind(this, article.id)}/>
 						</article>
 					)
-				})
-				}
+				}.bind(this))}
 				<div style={this.state.firstScreen? {display:'none'} : styles.toTop} onClick={this.handleToTop}>回到顶部</div>
 			</section>
 		)

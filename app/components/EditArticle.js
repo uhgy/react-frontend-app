@@ -1,3 +1,6 @@
+/**
+ * Created by hgyu on 16/3/11.
+ */
 import React from 'react';
 import {render} from 'react-dom';
 import {browserHistory, Link} from 'react-router';
@@ -6,18 +9,30 @@ import requestApi from '../request';
 var CreateArticle = React.createClass({
 	getInitialState() {
 		return {
-				title: "",
-				introduction: "",
-				content: "",
-				created: false
+			id: this.props.params.id,
+			title: "",
+			introduction: "",
+			content: "",
+			created: false
 		}
 	},
 
 	componentDidMount() {
-
+		//console.log(this.props)
+		requestApi.editArticle(this.state.id).pipe(
+			function(data){
+				console.log(data)
+				var data = JSON.parse(data)
+				this.setState({
+					title: data['data']['article']['title'],
+					introduction: data['data']['article']['introduction'],
+					content: data['data']['article']['content']
+				})
+			}.bind(this)
+		)
 	},
 	/*
-	  handleChange 分别绑定了title,introduction,content输入框
+	 handleChange 分别绑定了title,introduction,content输入框
 	 */
 
 	handleChange(name, event) {
@@ -34,16 +49,16 @@ var CreateArticle = React.createClass({
 			'content': this.state.content
 		}
 		requestApi.storeArticle(article).pipe(
-				function(data) {
-					var data = JSON.parse(data)
-					if(data && data['meta'] && data['meta']['code'] == 200) {
-						this.setState({created: true})
-						browserHistory.push('/article')
-					}else {
-						this.setState({created: false})
-					}
+			function(data) {
+				var data = JSON.parse(data)
+				if(data && data['meta'] && data['meta']['code'] == 200) {
+					this.setState({created: true})
+					browserHistory.push('/article')
+				}else {
+					this.setState({created: false})
+				}
 
-				}.bind(this)
+			}.bind(this)
 		)
 	},
 

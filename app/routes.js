@@ -7,6 +7,7 @@ import auth from './auth';
 import ArticleList from './components/ArticleList';
 import Article from './components/Article';
 import CreateArticle from './components/CreateArticle';
+import EditArticle from './components/EditArticle';
 import Register from './components/Register';
 import Login from './components/Login';
 import App from './components/App';
@@ -19,9 +20,10 @@ export default (
 	<Router history={browserHistory}>
 		<Route path="/" component={App} >
 			<IndexRoute component={Home}/>
-			<Route path="article" component={ArticleList}/>
-			<Route path="article/:id" component={Article}/>
-			<Route path="create/article" component={CreateArticle}/>
+			<Route path="/article" component={ArticleList}/>
+			<Route path="/article/:id" component={Article}/>
+			<Route path="/create/article" component={CreateArticle}/>
+			<Route path="/edit/article/:id" component={EditArticle}/>
 			<Route path="/login" component={Login}/>
 			<Route path="/register" component={Register}/>
 			<Route path="/logout" component={Logout}/>
