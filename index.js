@@ -15,7 +15,7 @@ console.log(config);
 /*
 匹配不以'/api/'开头的路由
 */
-app.use(rewrite(/^(?!\/api)\/*/, '/index.html'))
+app.use(rewrite(/^(?!((\/api)|(\/public)))\/*/, '/index.html'))
 /*
 开发模式和线上模式
  */
@@ -23,6 +23,7 @@ if(config.env_mode == 'dev'){
 	app.use(express.static(path.join(__dirname, 'build')));
 }else if(config.env_mode == 'deploy' || config.env_mode == 'production'){
 	app.use(express.static(path.join(__dirname, 'dist')));
+	app.use('/public', express.static(path.join(__dirname, 'public')));
 }
 
 
@@ -64,9 +65,9 @@ app.use('/api', function (req, res) {
 });
 
 
-app.get('/', function (req, res) {
-	res.render('index');
-});
+//app.get('/', function (req, res) {
+//	res.render('index');
+//});
 
 app.listen(app.get('port'), "0.0.0.0", function () {
 	console.log('Example app listening on port 3000!');
