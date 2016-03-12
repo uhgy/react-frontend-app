@@ -57,15 +57,15 @@ var CreateArticle = React.createClass({
 							<fieldset>
 								<section>
 									<label htmlFor="title">Title</label>
-									<input type="text" id="title" value={this.state.title} onChange={this.handleChange.bind(this, 'title')}/>
+									<input type="text" id="title" name="title" value={this.state.title} onChange={this.handleChange.bind(this, 'title')}/>
 								</section>
 								<section>
 									<label htmlFor="introduction">Introduction</label>
-									<input type="text" id="introduction" value={this.state.introduction} onChange={this.handleChange.bind(this, 'introduction')}/>
+									<input type="text" id="introduction" name="introduction" value={this.state.introduction} onChange={this.handleChange.bind(this, 'introduction')}/>
 								</section>
 								<section>
 									<label htmlFor="content">Content</label>
-									<textarea id="content" value={this.state.content} onChange={this.handleChange.bind(this, 'content')}/>
+									<textarea id="content" name="content" value={this.state.content} onChange={this.handleChange.bind(this, 'content')}/>
 								</section>
 								<section>
 									<button value="submit" onClick={this.handleSubmit}>提交</button>

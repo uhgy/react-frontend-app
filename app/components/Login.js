@@ -19,6 +19,7 @@ var Login = React.createClass({
 		}
 	},
 
+
 	handleSubmit(event) {
 		event.preventDefault()
 
@@ -46,16 +47,16 @@ var Login = React.createClass({
 				<fieldset>
 					<section>
 						<label htmlFor="email">Email</label>
-						<input type="email" ref="email" id="email" defaultValue="joe@example.com"/>
+						<input type="email" ref="email" id="email" name="email" defaultValue="joe@example.com"/>
 					</section>
 					<section>
 						<label htmlFor="password">Password</label>
-						<input type="password" ref="password" id="password"/>
+						<input type="password" ref="password" id="password" name="password"/>
 						<p className="hint">(hint: password1)</p>
 					</section>
 					<section className="remember-me">
 						<p>Remember Me</p>
-						<input type="checkbox" id="remember"/>
+						<input type="checkbox" id="remember" name="remember"/>
 						<label htmlFor="remember">keep me logged in</label>
 					</section>
 					<section>

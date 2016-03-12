@@ -30,38 +30,51 @@ if(config.env_mode == 'dev'){
 
 /*
 利用request向后端转发请求
-暂时只实现了GET和POST方法
+暂时只实现了GET/POST/DELETE方法
  */
 app.use('/api', function (req, res) {
-	console.log(req);
+	//console.log(req);
 	switch(req.method) {
 		case 'GET':
-			request(config.backendAddress+req.path, function (error, response, body) {
+			request({
+				url: config.backendAddress+req.path,
+				headers: {
+					'Cookie': req.headers.cookie
+				},
+				method: req.method,
+			}, function (error, response, body) {
 				if (!error && response.statusCode == 200) {
 					res.send(body)
 				}
 			});
 			break;
 		case 'POST':
-				//console.log(req)
 			request({
 				url: config.backendAddress+req.path,
+				headers: {
+					'Cookie': req.headers.cookie
+				},
 				method: req.method,
 				form: req.body
 			}, function (error, response, body) {
 				if (!error && response.statusCode == 200) {
+					//var setCookie = response.headers['set-cookie'];
+					//res.setHeader('set-cookie', setCookie)
+					//res.setHeader('Cache-Control', 'no-cache'); // 4 days
+					//res.setHeader('Expires', new Date(Date.now() + 3600).toUTCString());
 					res.send(body)
-					//console.log(response)
 				}
 			});
 			break;
 		case 'PUT':
 			break;
 		case 'DELETE':
-			console.log(req.method)
 			request({
 				url: config.backendAddress+req.path,
 				method: req.method,
+				headers: {
+					'Cookie': req.headers.cookie
+				},
 			}, function (error, response, body) {
 				if (!error && response.statusCode == 200) {
 					res.send(body)
