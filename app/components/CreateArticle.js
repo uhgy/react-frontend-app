@@ -33,6 +33,9 @@ var CreateArticle = React.createClass({
 			'introduction': this.state.introduction,
 			'content': this.state.content
 		}
+		/*
+		保存文章
+		 */
 		requestApi.storeArticle(article).pipe(
 				function(data) {
 					var data = JSON.parse(data)

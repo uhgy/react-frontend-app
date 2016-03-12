@@ -26,6 +26,9 @@ var Login = React.createClass({
 		const email = this.refs.email.value
 		const pass = this.refs.password.value
 
+		/*
+		登陆后跳转到首页
+		 */
 		auth.login(email, pass, (loggedIn) => {
 			console.log(loggedIn)
 			if (!loggedIn)

@@ -11,9 +11,11 @@ var auth = {
 		}
 
 		postLogin(email, pass, (res) => {
-			console.log(res)
+			//console.log(res)
 			if(res.authenticated) {
 				localStorage.token = res.token
+				createCookie("userId", res.userId, {expires: 15})
+				createCookie("username", res.username, {expires: 15})
 				if(cb) cb(true)
 				this.onChange(true)
 			} else {
@@ -26,7 +28,7 @@ var auth = {
 	register(name, email, pass, pass_confirm, cb) {
 		cb = arguments[arguments.length - 1]
 		postRegister(name, email, pass, pass_confirm, (res) => {
-			console.log(res)
+			//console.log(res)
 			if(res.registered) {
 				if(cb) cb(true)
 			} else {
@@ -43,12 +45,23 @@ var auth = {
 
 	logout(cb) {
 		delete localStorage.token
+		eraseCookie("userId")
+		eraseCookie("username")
 		if (cb) cb()
 		this.onChange(false)
 	},
 
 	loggedIn() {
 		return !!localStorage.token
+	},
+
+	userInfo() {
+		var username = readCookie("username")
+		var userId = readCookie("userId")
+		return {
+			"username": username,
+			"userId": userId
+		}
 	},
 
 	onChange() {}
@@ -65,13 +78,15 @@ function postLogin(email, pass, cb) {
 		method: 'POST',
 		data: data
 	}).done(function (data) {
-		console.log(data)
+		//console.log(data)
 		var data = JSON.parse(data)
-		console.log(data)
+		//console.log(data)
 		if(data.meta.code === "200") {
 			cb({
 				authenticated: true,
-				token: Math.random().toString(36).substring(7)
+				token: Math.random().toString(36).substring(7),
+				userId: data.data.logInfo.id,
+				username: data.data.logInfo.name
 			})
 		}
 		else {
@@ -108,6 +123,34 @@ function postRegister(name, email, pass, pass_confirm, cb) {
 	}).fail(function (err) {
 		console.log(err)
 	});
+}
+
+function createCookie(name, value, days) {
+	var expires;
+
+	if (days) {
+		var date = new Date();
+		date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+		expires = "; expires=" + date.toGMTString();
+	} else {
+		expires = "";
+	}
+	document.cookie = encodeURIComponent(name) + "=" + encodeURIComponent(value) + expires + "; path=/";
+}
+
+function readCookie(name) {
+	var nameEQ = encodeURIComponent(name) + "=";
+	var ca = document.cookie.split(';');
+	for (var i = 0; i < ca.length; i++) {
+		var c = ca[i];
+		while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+		if (c.indexOf(nameEQ) === 0) return decodeURIComponent(c.substring(nameEQ.length, c.length));
+	}
+	return null;
+}
+
+function eraseCookie(name) {
+	createCookie(name, "", -1);
 }
 
 export default auth;

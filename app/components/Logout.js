@@ -10,6 +10,7 @@ var Logout = React.createClass({
 	componentDidMount() {
 		auth.logout()
 	},
+
 	render() {
 		return (
 			<div>

@@ -15,21 +15,24 @@ var NavBar = React.createClass({
 
 	getInitialState() {
 		return {
-			loggedIn: auth.loggedIn()
+			loggedIn: auth.loggedIn(),
+			username: "",
+			userId: ""
 		}
 
 	},
 	updateAuth(loggedIn) {
-		this.setState({
-			loggedIn: loggedIn
-		})
+		var username = auth.userInfo().username
+		var userId = auth.userInfo().userId
+		this.setState({loggedIn: loggedIn, userId: userId, username: username})
 	},
 
 	componentWillMount() {
 		auth.onChange = this.updateAuth
-		auth.login()
 	},
+
 	render() {
+		//console.log(this.state)
 		return (
 			<header>
 				<h1><Link to="/">Home</Link></h1>
@@ -45,21 +48,24 @@ var NavBar = React.createClass({
 				</nav>
 				<section className="login">
 					<Link to="/" className="login-ctrl"></Link>
-					<ul>
-						<li>
-							{this.state.loggedIn ? (
-									<Link to="/logout">Log out</Link>
-							) : (
-									<Link to="/login">Log in</Link>
-							)}
-						</li>
-						<li><Link to="/register"   >register</Link></li>
-						<li><Link to="/"   >change password</Link></li>
-					</ul>
+
+						{this.state.loggedIn ? (
+							<ul>
+								<li><Link to={`/user/${this.state.userId}`}>{this.state.username}</Link></li>
+								<li><Link to="/logout">Logout</Link></li>
+							</ul>
+						) : (
+							<ul>
+								<li><Link to="/login">Log in</Link></li>
+								<li><Link to="/register" >register</Link></li>
+							</ul>
+						)}
+
+
 			</section>
 			</header>
 		)
 	}
 })
-
+		//<li><Link to="/"   >change password</Link></li>
 export default NavBar;

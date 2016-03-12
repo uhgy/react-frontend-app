@@ -12,6 +12,9 @@ var Article = React.createClass({
 	},
 
 	componentDidMount() {
+		/*
+		获取文章列表
+		 */
 		requestApi.getArticle(this.state.id).pipe(
 			function(data){
 				console.log(data)

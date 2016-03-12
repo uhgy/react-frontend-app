@@ -9,11 +9,16 @@ import Login from './Login';
 import NavBar from './NavBar';
 import Footer from './Footer';
 
+
+/*
+网站入口
+ */
 var App = React.createClass({
 
 	getInitialState() {
 		return {
 			loggedIn: auth.loggedIn()
+
 		}
 	},
 
