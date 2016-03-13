@@ -15,16 +15,16 @@ var NavBar = React.createClass({
 
 	getInitialState() {
 		return {
-			loggedIn: auth.loggedIn(),
-			username: "",
-			userId: ""
+			logged_in: auth.loggedIn(),
+			username: auth.userInfo().username,
+			user_id: auth.userInfo().user_id
 		}
 
 	},
 	updateAuth(loggedIn) {
 		var username = auth.userInfo().username
-		var userId = auth.userInfo().userId
-		this.setState({loggedIn: loggedIn, userId: userId, username: username})
+		var user_id = auth.userInfo().user_id
+		this.setState({logged_in: loggedIn, user_id: user_id, username: username})
 	},
 
 	componentWillMount() {
@@ -32,7 +32,6 @@ var NavBar = React.createClass({
 	},
 
 	render() {
-		//console.log(this.state)
 		return (
 			<header>
 				<h1><Link to="/">Home</Link></h1>
@@ -49,9 +48,9 @@ var NavBar = React.createClass({
 				<section className="login">
 					<Link to="/" className="login-ctrl"></Link>
 
-						{this.state.loggedIn ? (
+						{this.state.logged_in ? (
 							<ul>
-								<li><Link to={`/user/${this.state.userId}`}>{this.state.username}</Link></li>
+								<li><Link to={`/user/${this.state.user_id}`}>{this.state.username}</Link></li>
 								<li><Link to="/logout">Logout</Link></li>
 							</ul>
 						) : (

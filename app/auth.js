@@ -14,7 +14,7 @@ var auth = {
 			//console.log(res)
 			if(res.authenticated) {
 				localStorage.token = res.token
-				createCookie("userId", res.userId, {expires: 15})
+				createCookie("user_id", res.user_id, {expires: 15})
 				createCookie("username", res.username, {expires: 15})
 				if(cb) cb(true)
 				this.onChange(true)
@@ -28,7 +28,6 @@ var auth = {
 	register(name, email, pass, pass_confirm, cb) {
 		cb = arguments[arguments.length - 1]
 		postRegister(name, email, pass, pass_confirm, (res) => {
-			//console.log(res)
 			if(res.registered) {
 				if(cb) cb(true)
 			} else {
@@ -45,7 +44,7 @@ var auth = {
 
 	logout(cb) {
 		delete localStorage.token
-		eraseCookie("userId")
+		eraseCookie("user_id")
 		eraseCookie("username")
 		if (cb) cb()
 		this.onChange(false)
@@ -56,11 +55,9 @@ var auth = {
 	},
 
 	userInfo() {
-		var username = readCookie("username")
-		var userId = readCookie("userId")
 		return {
-			"username": username,
-			"userId": userId
+			"username": readCookie("username") || "",
+			"user_id": readCookie("user_id") || ""
 		}
 	},
 
@@ -85,7 +82,7 @@ function postLogin(email, pass, cb) {
 			cb({
 				authenticated: true,
 				token: Math.random().toString(36).substring(7),
-				userId: data.data.logInfo.id,
+				user_id: data.data.logInfo.id,
 				username: data.data.logInfo.name
 			})
 		}

@@ -50,7 +50,7 @@ var Login = React.createClass({
 				<fieldset>
 					<section>
 						<label htmlFor="email">Email</label>
-						<input type="email" ref="email" id="email" name="email" defaultValue="joe@example.com"/>
+						<input type="email" ref="email" id="email" name="email" defaultValue="test@example.com"/>
 					</section>
 					<section>
 						<label htmlFor="password">Password</label>

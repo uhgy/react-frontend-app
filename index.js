@@ -13,9 +13,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 console.log(config);
 
 /*
-匹配不以'/api/'开头的路由
+匹配不以'/api/'以及'/public/'开头的路由
 */
 app.use(rewrite(/^(?!((\/api)|(\/public)))\/*/, '/index.html'))
+
 /*
 开发模式和线上模式
  */
@@ -33,7 +34,6 @@ if(config.env_mode == 'dev'){
 暂时只实现了GET/POST/DELETE方法
  */
 app.use('/api', function (req, res) {
-	//console.log(req);
 	switch(req.method) {
 		case 'GET':
 			request({
@@ -57,6 +57,7 @@ app.use('/api', function (req, res) {
 				method: req.method,
 				form: req.body
 			}, function (error, response, body) {
+				//console.log(response);
 				if (!error && response.statusCode == 200) {
 					//var setCookie = response.headers['set-cookie'];
 					//res.setHeader('set-cookie', setCookie)
