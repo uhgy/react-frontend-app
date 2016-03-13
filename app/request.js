@@ -2,9 +2,9 @@ import $ from 'jquery';
 
 var requestApi = {
 
-	getArticles() {
+	getArticles(page) {
 		var user_id = readCookie("user_id")
-		return $.get('/api/user/'+user_id+'/article')
+		return $.get('/api/user/'+user_id+'/article?page='+page)
 			done(function (data) {
 
 			}).fail(function (err) {

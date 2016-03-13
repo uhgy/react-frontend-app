@@ -4,6 +4,7 @@
 import React from 'react';
 import {render} from 'react-dom';
 import {browserHistory, Link} from 'react-router';
+import ReactPaginate from 'react-paginate';
 import requestApi from '../request';
 
 var styles = {};
@@ -30,7 +31,9 @@ var ArticleList = React.createClass({
 			isTop: true,
 			timer: null,
 			firstScreen: true,
-			fetchData: 'loading'
+			fetchData: 'loading',
+			pageNum: 0,
+			page: 1
 		}
 	},
 
@@ -54,19 +57,10 @@ var ArticleList = React.createClass({
 	},
 
 
+
 	componentDidMount() {
-		/*
-		向后端发请求获取article列表
-		 */
-		requestApi.getArticles().pipe(
-			function(data){
-				var data = JSON.parse(data)
-				this.setState({
-					articles: data['data']['articles'],
-					fetchData: 'done'
-				})
-			}.bind(this)
-		)
+		var page = this.state.page
+		this.updateArticleList(page)
 		window.addEventListener('scroll', this.onScrollToTop, false)
 	},
 
@@ -75,26 +69,44 @@ var ArticleList = React.createClass({
 	},
 
 	handleDeleteArticle(id) {
-		console.log(event)
-		console.log(id)
 		requestApi.deleteArticle(id).pipe(
 			function(data) {
 				var data = JSON.parse(data)
 				if (data && data['meta'] && data['meta']['code'] == 200) {
-					requestApi.getArticles().pipe(
-							function(data){
-								var data = JSON.parse(data)
-								this.setState({
-									articles: data['data']['articles'],
-									fetchData: 'done'
-								})
-							}.bind(this)
-					)
+					this.updateArticleList(this.state.page)
 				} else {
 
 				}
 			}.bind(this)
 		)
+	},
+
+	/*
+	 向后端发请求获取article列表
+	 */
+	updateArticleList(page) {
+		requestApi.getArticles(page).pipe(
+				function(data){
+					var data = JSON.parse(data)
+					var pageNum = parseInt(data.data.total / data.data.perPage, 10)
+					if(pageNum === parseInt(pageNum, 10)) {
+						this.setState({pageNum: pageNum})
+					}
+					this.setState({
+						articles: data['data']['articles'],
+						fetchData: 'done',
+						page: page
+					})
+				}.bind(this)
+		)
+	},
+
+	/*
+	分页
+	 */
+	handlePageClick(event) {
+		var page = parseInt(event.selected) + 1;
+		this.updateArticleList(page)
 	},
 
 	/*
@@ -114,6 +126,7 @@ var ArticleList = React.createClass({
 	},
 
 	render() {
+		console.log('render')
 		if(this.state.articles.length === 0) {
 			if(this.state.fetchData === 'done') {
 				return <p>There is no articles!</p>
@@ -137,6 +150,16 @@ var ArticleList = React.createClass({
 						</article>
 					)
 				}.bind(this))}
+				<ReactPaginate previousLabel={"previous"}
+				               nextLabel={"next"}
+				               breakLabel={<li className="break"><a href="">...</a></li>}
+				               pageNum={this.state.pageNum}
+				               marginPagesDisplayed={2}
+				               pageRangeDisplayed={5}
+				               clickCallback={this.handlePageClick}
+				               containerClassName={"pagination"}
+				               subContainerClassName={"pages pagination"}
+				               activeClassName={"active"} />
 				<div style={this.state.firstScreen? {display:'none'} : styles.toTop} onClick={this.handleToTop}>回到顶部</div>
 			</section>
 		)

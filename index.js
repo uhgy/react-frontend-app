@@ -34,10 +34,11 @@ if(config.env_mode == 'dev'){
 暂时只实现了GET/POST/DELETE方法
  */
 app.use('/api', function (req, res) {
+	console.log(req)
 	switch(req.method) {
 		case 'GET':
 			request({
-				url: config.backendAddress+req.path,
+				url: config.backendAddress+req.url,
 				headers: {
 					'Cookie': req.headers.cookie
 				},
@@ -50,7 +51,7 @@ app.use('/api', function (req, res) {
 			break;
 		case 'POST':
 			request({
-				url: config.backendAddress+req.path,
+				url: config.backendAddress+req.url,
 				headers: {
 					'Cookie': req.headers.cookie
 				},
@@ -71,7 +72,7 @@ app.use('/api', function (req, res) {
 			break;
 		case 'DELETE':
 			request({
-				url: config.backendAddress+req.path,
+				url: config.backendAddress+req.url,
 				method: req.method,
 				headers: {
 					'Cookie': req.headers.cookie
