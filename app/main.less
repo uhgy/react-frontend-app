@@ -100,6 +100,7 @@ header {
 
         li {
           float:none;
+          overflow: hidden;
           &:nth-child(1) > a {
             background: #5bc0de;
           }
@@ -113,11 +114,12 @@ header {
   section.login {
     float: right;
     margin: 1.2em .5em 1.2em 0;
-    width: 8em;
+    //width: 8em;
     li {
       float:left;
       position:relative;
       width: 4em;
+      display: block;
       a {
         padding: .25em .25em;
       }
@@ -309,6 +311,29 @@ ArticleList component
       background-color: #d9534f;
     }
   }
+}
+
+.pagination {
+  ul {
+    display: inline-block;
+  }
+  li {
+    float:left;
+    a {
+      display:block;
+      padding: .25em .25em;
+      margin: 0 .25em;
+      background: #337ab7;
+      border-color:#2e6da4;
+      &:hover {
+        color:#fff;
+        border-color:#5bc0de;
+        border:.2em;
+      }
+    }
+
+  }
+
 }
 /*
 CreateArticle component

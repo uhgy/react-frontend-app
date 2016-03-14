@@ -20,6 +20,14 @@ var Home = React.createClass({
 	},
 	componentDidMount() {
 		this.updateArticleList(this.state.page)
+		window.addEventListener('scroll', this.onScrollToBottom, false)
+	},
+
+	/*
+	 离开页面时移除scroll监听
+	 */
+	componentWillUnmount() {
+		window.removeEventListener('scroll', this.onScrollToBottom, false)
 	},
 
 	/*
@@ -28,21 +36,60 @@ var Home = React.createClass({
 	updateArticleList(page) {
 		requestApi.getRecentArticles(page).pipe(
 				function(res){
-					var pageNum = Math.ceil(res.data.total / res.data.perPage)
-					if(pageNum === parseInt(pageNum, 10)) {
-						this.setState({pageNum: pageNum})
+					if(res.data.perPage && res.data.total
+							&& res.meta.code === "200") {
+						if(this.state.page * res.data.perPage < res.data.total) {
+							var pageNum = Math.ceil(res.data.total / res.data.perPage)
+							if (pageNum === parseInt(pageNum, 10)) {
+								this.setState({pageNum: pageNum})
+							}
+							var articles = this.state.articles
+							res.data.articles.map(function (article) {
+								articles.push(article)
+							})
+							console.log(articles)
+							this.setState({
+								articles: articles,
+								fetchData: 'done',
+								page: page
+							})
+						} else {
+							this.setState({fetchData: "nomore"})
+						}
 					}
-					this.setState({
-						articles: res.data.articles,
-						fetchData: 'done',
-						page: page
-					})
 				}.bind(this)
 		)
 	},
 
+
+	getDocHeight() {
+		var D = document;
+		return Math.max(
+				D.body.scrollHeight, D.documentElement.scrollHeight,
+				D.body.offsetHeight, D.documentElement.offsetHeight,
+				D.body.clientHeight, D.documentElement.clientHeight
+		);
+	},
+	/*
+	 判断是否到达页面底部,加载新的数据
+	 */
+	onScrollToBottom() {
+		var clientHeight = document.documentElement.clientHeight
+		var osTop = document.documentElement.scrollTop || document.body.scrollTop
+		if(osTop + clientHeight >= this.getDocHeight()) {
+			this.updateArticleList(this.state.page+1)
+		}
+	},
+
 	render() {
-			return (
+		var loadMore = (function() {
+			if(this.state.fetchData === "loading") {
+				return <div>正在加载.........</div>;
+			} else if(this.state.fetchData === "nomore") {
+				return <div>没有更多文章了</div>;
+			}
+		}.bind(this))()
+		return (
 			<div className="home">
 				<h2>Home</h2>
 				<article>
@@ -61,6 +108,7 @@ var Home = React.createClass({
 					<ArticleList articles={this.state.articles}
 					             fetchData={this.state.fetchData}
 				               updateArticleList={this.updateArticleList}/>
+					{loadMore}
 				</section>
 				<aside>
 
