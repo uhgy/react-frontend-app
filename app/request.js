@@ -5,7 +5,7 @@ var requestApi = {
 	getArticles(page) {
 		var user_id = readCookie("user_id")
 		return $.get('/api/user/'+user_id+'/article?page='+page)
-			done(function (data) {
+			done(function (res) {
 
 			}).fail(function (err) {
 				console.log(err);
@@ -15,8 +15,8 @@ var requestApi = {
 
 	getArticle(id) {
 		return $.get('/api/article/'+id)
-			.done(function (data) {
-				console.log(data);
+			.done(function (res) {
+				console.log(res);
 			}).fail(function (err) {
 				console.log(err);
 			});
@@ -24,8 +24,8 @@ var requestApi = {
 
 	editArticle(id) {
 		return $.get('/api/article/'+id+'/edit')
-			.done(function (data) {
-				console.log(data)
+			.done(function (res) {
+				console.log(res)
 			}).fail(function (err) {
 					console.log(err);
 				});
@@ -37,7 +37,20 @@ var requestApi = {
 			url: '/api/article',
 			method: 'POST',
 			data: article
-		}).done(function (data) {
+		}).done(function (res) {
+
+		}).fail(function (err) {
+			console.log(err);
+		});
+	},
+
+	updateArticle(article) {
+		article.user_id = readCookie("user_id")
+		return $.ajax({
+			url: '/api/article/'+article.id,
+			method: 'POST',
+			data: article
+		}).done(function (res) {
 
 		}).fail(function (err) {
 			console.log(err);
@@ -48,7 +61,7 @@ var requestApi = {
 		return $.ajax({
 			url: '/api/article/'+id,
 			method: 'DELETE'
-		}).done(function (data) {
+		}).done(function (res) {
 
 		}).fail(function (err) {
 			console.log(err);
@@ -57,7 +70,7 @@ var requestApi = {
 
 	getUsers() {
 		return $.get('/api/user')
-		done(function (data) {
+		done(function (res) {
 
 		}).fail(function (err) {
 			console.log(err);
@@ -67,8 +80,8 @@ var requestApi = {
 
 	getUser(id) {
 		return $.get('/api/user/'+id)
-				.done(function (data) {
-					console.log(data);
+				.done(function (res) {
+					console.log(res);
 				}).fail(function (err) {
 					console.log(err);
 				});
@@ -76,8 +89,8 @@ var requestApi = {
 
 	editUser(id) {
 		return $.get('/api/user/'+id+'/edit')
-				.done(function (data) {
-					console.log(data)
+				.done(function (res) {
+					console.log(res)
 				}).fail(function (err) {
 					console.log(err);
 				});
@@ -88,7 +101,7 @@ var requestApi = {
 			url: '/api/user',
 			method: 'POST',
 			data: user
-		}).done(function (data) {
+		}).done(function (res) {
 
 		}).fail(function (err) {
 			console.log(err);
@@ -99,7 +112,7 @@ var requestApi = {
 		return $.ajax({
 			url: '/api/user/'+id,
 			method: 'DELETE'
-		}).done(function (data) {
+		}).done(function (res) {
 
 		}).fail(function (err) {
 			console.log(err);

@@ -10,6 +10,7 @@ import auth from './../auth';
 var CreateArticle = React.createClass({
 	getInitialState() {
 		return {
+			logged_in: auth.loggedIn(),
 			id: this.props.params.id,
 			title: "",
 			introduction: "",
@@ -27,9 +28,9 @@ var CreateArticle = React.createClass({
 		}
 		//console.log(this.props)
 		requestApi.editArticle(this.state.id).pipe(
-			function(data){
-				console.log(data)
-				var data = JSON.parse(data)
+			function(res){
+				console.log(res)
+				var data = JSON.parse(res.data)
 				this.setState({
 					title: data['data']['article']['title'],
 					introduction: data['data']['article']['introduction'],
@@ -55,10 +56,9 @@ var CreateArticle = React.createClass({
 			'introduction': this.state.introduction,
 			'content': this.state.content
 		}
-		requestApi.storeArticle(article).pipe(
-			function(data) {
-				var data = JSON.parse(data)
-				if(data && data['meta'] && data['meta']['code'] == 200) {
+		requestApi.updateArticle(article).pipe(
+			function(res) {
+				if(res && res['meta'] && res['meta']['code'] == 200) {
 					this.setState({created: true})
 					browserHistory.push('/article')
 				}else {

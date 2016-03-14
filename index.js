@@ -34,59 +34,22 @@ if(config.env_mode == 'dev'){
 暂时只实现了GET/POST/DELETE方法
  */
 app.use('/api', function (req, res) {
-	console.log(req)
-	switch(req.method) {
-		case 'GET':
-			request({
-				url: config.backendAddress+req.url,
-				headers: {
-					'Cookie': req.headers.cookie
-				},
-				method: req.method,
-			}, function (error, response, body) {
-				if (!error && response.statusCode == 200) {
-					res.send(body)
-				}
-			});
-			break;
-		case 'POST':
-			request({
-				url: config.backendAddress+req.url,
-				headers: {
-					'Cookie': req.headers.cookie
-				},
-				method: req.method,
-				form: req.body
-			}, function (error, response, body) {
-				//console.log(response);
-				if (!error && response.statusCode == 200) {
-					//var setCookie = response.headers['set-cookie'];
-					//res.setHeader('set-cookie', setCookie)
-					//res.setHeader('Cache-Control', 'no-cache'); // 4 days
-					//res.setHeader('Expires', new Date(Date.now() + 3600).toUTCString());
-					res.send(body)
-				}
-			});
-			break;
-		case 'PUT':
-			break;
-		case 'DELETE':
-			request({
-				url: config.backendAddress+req.url,
-				method: req.method,
-				headers: {
-					'Cookie': req.headers.cookie
-				},
-			}, function (error, response, body) {
-				if (!error && response.statusCode == 200) {
-					res.send(body)
-					//console.log(response)
-				}
-			});
-			break;
-		default: break;
-	}
 
+		request({
+			url: config.backendAddress+req.url,
+			headers: req.headers,
+			method: req.method,
+			form: req.body
+		}, function (error, response, body) {
+			//console.log(response);
+			if (!error && response.statusCode == 200) {
+				//console.log(response.headers)
+				Object.keys(response.headers).forEach(function(key) {
+					res.setHeader(key, response.headers[key]);
+				});
+				res.send(body)
+			}
+		});
 });
 
 

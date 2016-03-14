@@ -74,16 +74,14 @@ function postLogin(email, pass, cb) {
 		url: '/api/auth/login',
 		method: 'POST',
 		data: data
-	}).done(function (data) {
-		//console.log(data)
-		var data = JSON.parse(data)
-		//console.log(data)
-		if(data.meta.code === "200") {
+	}).done(function (res) {
+		console.log(res)
+		if(res.meta.code === "200") {
 			cb({
 				authenticated: true,
 				token: Math.random().toString(36).substring(7),
-				user_id: data.data.logInfo.id,
-				username: data.data.logInfo.name
+				user_id: res.data.logInfo.id,
+				username: res.data.logInfo.name
 			})
 		}
 		else {
@@ -105,13 +103,12 @@ function postRegister(name, email, pass, pass_confirm, cb) {
 		url: '/api/auth/register',
 		method: 'POST',
 		data: data
-	}).done(function (data) {
-		console.log(data)
-		var data = JSON.parse(data)
-		if(data.meta.code === "200") {
+	}).done(function (res) {
+		console.log(res.data)
+		if(res.meta.code === "200") {
 			cb({
 				registered: true,
-				regInfo: data.data.regInfo
+				regInfo: res.data.regInfo
 			})
 		}
 		else {

@@ -7,6 +7,7 @@ import auth from './../auth';
 var CreateArticle = React.createClass({
 	getInitialState() {
 		return {
+			logged_in: auth.loggedIn(),
 				title: "",
 				introduction: "",
 				content: "",
@@ -43,9 +44,8 @@ var CreateArticle = React.createClass({
 		保存文章
 		 */
 		requestApi.storeArticle(article).pipe(
-				function(data) {
-					var data = JSON.parse(data)
-					if(data && data['meta'] && data['meta']['code'] == 200) {
+				function(res) {
+					if(res && res['meta'] && res['meta']['code'] == 200) {
 						this.setState({created: true})
 						browserHistory.push('/article')
 					}else {

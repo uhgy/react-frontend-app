@@ -80,8 +80,8 @@ var ArticleList = React.createClass({
 
 	handleDeleteArticle(id) {
 		requestApi.deleteArticle(id).pipe(
-			function(data) {
-				var data = JSON.parse(data)
+			function(res) {
+				var data = JSON.parse(res.data)
 				if (data && data['meta'] && data['meta']['code'] == 200) {
 					this.updateArticleList(this.state.page)
 				} else {
@@ -96,14 +96,13 @@ var ArticleList = React.createClass({
 	 */
 	updateArticleList(page) {
 		requestApi.getArticles(page).pipe(
-				function(data){
-					var data = JSON.parse(data)
-					var pageNum = parseInt(data.data.total / data.data.perPage, 10)
+				function(res){
+					var pageNum = parseInt(res.data.total / res.data.perPage, 10)
 					if(pageNum === parseInt(pageNum, 10)) {
 						this.setState({pageNum: pageNum})
 					}
 					this.setState({
-						articles: data['data']['articles'],
+						articles: res['data']['articles'],
 						fetchData: 'done',
 						page: page
 					})
@@ -136,7 +135,7 @@ var ArticleList = React.createClass({
 	},
 
 	render() {
-		console.log('render')
+		//console.log('render')
 		if(!this.state.logged_in) {
 			return (
 					<div>

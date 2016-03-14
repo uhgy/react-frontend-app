@@ -1,12 +1,14 @@
 import React from 'react';
 import {render} from 'react-dom';
-import {Link} from 'react-router';
+import {browserHistory, Link} from 'react-router';
 import requestApi from '../request';
 import auth from './../auth';
 
 var Article = React.createClass({
+
 	getInitialState() {
 		return {
+			logged_in: auth.loggedIn(),
 			article: "",
 			id: this.props.params.id
 		}
@@ -25,10 +27,9 @@ var Article = React.createClass({
 		获取文章列表
 		 */
 		requestApi.getArticle(this.state.id).pipe(
-			function(data){
-				console.log(data)
-				var data = JSON.parse(data)
-				this.setState({ article: data['data']['article'] })
+			function(res){
+				console.log(res)
+				this.setState({ article: res['data']['article'] })
 			}.bind(this)
 		)
 	},
