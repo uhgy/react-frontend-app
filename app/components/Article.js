@@ -3,7 +3,16 @@ import {render} from 'react-dom';
 import {browserHistory, Link} from 'react-router';
 import requestApi from '../request';
 import auth from './../auth';
+var styles = {}
 
+styles.deleteButton = {
+	float: "right",
+	width: "4em",
+	height: "2em",
+	color: "#fff",
+	backgroundColor: "#d9534f",
+	borderColor: "#d43f3a"
+}
 var Article = React.createClass({
 
 	getInitialState() {
@@ -87,7 +96,7 @@ var Article = React.createClass({
 				<p>{article.introduction} {article.published_at}</p>
 				<p>{article.content}</p>
 				<Link to={`/edit/article/${article.id}`}>edit Article</Link>
-				<input type="button" value="delete" onClick={this.handleDeleteArticle.bind(this, article.id)}/>
+				<input type="button" style={styles.deleteButton}value="delete" onClick={this.handleDeleteArticle.bind(this, article.id)}/>
 			</article>
 		)
 	}
