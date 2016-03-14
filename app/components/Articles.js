@@ -11,7 +11,7 @@ import auth from './../auth';
 var styles = {};
 
 /*
- 回到顶部按钮
+  回到顶部按钮
  */
 styles.toTop = {
 	position: 'fixed',
@@ -43,31 +43,31 @@ var ArticleList = React.createClass({
 	 滚轮滑动时效果
 	 */
 	onScrollToTop() {
-		var clientHeight = document.documentElement.clientHeight
-		var osTop = document.documentElement.scrollTop || document.body.scrollTop
-		if (osTop >= clientHeight){
-			this.setState({firstScreen: false})
-		}else {
-			this.setState({firstScreen: true})
+			var clientHeight = document.documentElement.clientHeight
+			var osTop = document.documentElement.scrollTop || document.body.scrollTop
+			if (osTop >= clientHeight){
+				this.setState({firstScreen: false})
+			}else {
+				this.setState({firstScreen: true})
 
-		}
+			}
 
-		if(!this.state.isTop){
-			clearInterval(this.state.timer)
-		}
-		this.setState({isTop: false})
+			if(!this.state.isTop){
+				clearInterval(this.state.timer)
+			}
+			this.setState({isTop: false})
 	},
 
 	componentWillMount() {
-		
+
 	},
 
 	componentDidMount() {
 		if(!this.state.logged_in) {
 			setTimeout(
-				function() {
-					browserHistory.push('/login')
-				}, 3000)
+					function() {
+						browserHistory.push('/login')
+					}, 3000)
 		}
 		var page = this.state.page
 		this.updateArticleList(page)
@@ -75,54 +75,54 @@ var ArticleList = React.createClass({
 	},
 
 	/*
-	 离开页面时移除scroll监听
+	离开页面时移除scroll监听
 	 */
 	componentWillUnmount() {
 		window.removeEventListener('scroll', this.onScrollToTop, false)
 	},
 
-	//handleDeleteArticle(id) {
-	//	requestApi.deleteArticle(id).pipe(
-	//		function(res) {
-	//			var data = JSON.parse(res.data)
-	//			if (data && data['meta'] && data['meta']['code'] == 200) {
-	//				this.updateArticleList(this.state.page)
-	//			} else {
-	//
-	//			}
-	//		}.bind(this)
-	//	)
-	//},
+	handleDeleteArticle(id) {
+		requestApi.deleteArticle(id).pipe(
+			function(res) {
+				var data = JSON.parse(res.data)
+				if (data && data['meta'] && data['meta']['code'] == 200) {
+					this.updateArticleList(this.state.page)
+				} else {
 
-	///*
-	// 向后端发请求获取article列表
-	// */
-	//updateArticleList(page) {
-	//	requestApi.getArticles(page).pipe(
-	//		function(res){
-	//			var pageNum = Math.ceil(res.data.total / res.data.perPage)
-	//			if(pageNum === parseInt(pageNum, 10)) {
-	//				this.setState({pageNum: pageNum})
-	//			}
-	//			this.setState({
-	//				articles: res['data']['articles'],
-	//				fetchData: 'done',
-	//				page: page
-	//			})
-	//		}.bind(this)
-	//	)
-	//},
-
-	///*
-	// 分页
-	// */
-	//handlePageClick(event) {
-	//	var page = parseInt(event.selected) + 1;
-	//	this.updateArticleList(page)
-	//},
+				}
+			}.bind(this)
+		)
+	},
 
 	/*
-	 点击回到顶部按钮
+	 向后端发请求获取article列表
+	 */
+	updateArticleList(page) {
+		requestApi.getArticles(page).pipe(
+				function(res){
+					var pageNum = Math.ceil(res.data.total / res.data.perPage)
+					if(pageNum === parseInt(pageNum, 10)) {
+						this.setState({pageNum: pageNum})
+					}
+					this.setState({
+						articles: res['data']['articles'],
+						fetchData: 'done',
+						page: page
+					})
+				}.bind(this)
+		)
+	},
+
+	/*
+	分页
+	 */
+	handlePageClick(event) {
+		var page = parseInt(event.selected) + 1;
+		this.updateArticleList(page)
+	},
+
+	/*
+	点击回到顶部按钮
 	 */
 	handleToTop(event) {
 		var timerVal = setInterval(function() {
@@ -141,10 +141,10 @@ var ArticleList = React.createClass({
 		//console.log('render')
 		if(!this.state.logged_in) {
 			return (
-				<div>
-					<p>You are not logged in, left 3s to jump to the login page... </p>
-					<Link to="/login">Login page</Link>
-				</div>
+					<div>
+						<p>You are not logged in, left 3s to jump to the login page... </p>
+						<Link to="/login">Login page</Link>
+					</div>
 			)
 		}
 		if(this.state.articles.length === 0) {

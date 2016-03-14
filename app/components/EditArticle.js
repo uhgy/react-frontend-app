@@ -11,12 +11,37 @@ var CreateArticle = React.createClass({
 	getInitialState() {
 		return {
 			logged_in: auth.loggedIn(),
-			id: this.props.params.id,
 			title: "",
 			introduction: "",
 			content: "",
-			created: false
+			created: false,
+			error: []
 		}
+	},
+
+	getArticle() {
+		requestApi.editArticle(this.props.params.id).pipe(
+				function(res){
+					console.log(res)
+					if(res && res['meta'] && res['meta']['code'] == 200) {
+						this.setState({
+							title: res['data']['article']['title'],
+							introduction: res['data']['article']['introduction'],
+							content: res['data']['article']['content']
+						})
+					} else{
+						this.setState({
+							error: [res.meta.code, res.meta.error]
+						})
+						if(this.state.error.length !== 0) {
+							setTimeout(
+									function() {
+										browserHistory.push('/')
+									}, 3000)
+						}
+					}
+				}.bind(this)
+		)
 	},
 
 	componentDidMount() {
@@ -26,18 +51,8 @@ var CreateArticle = React.createClass({
 						browserHistory.push('/login')
 					}, 3000)
 		}
-		//console.log(this.props)
-		requestApi.editArticle(this.state.id).pipe(
-			function(res){
-				console.log(res)
-				var data = JSON.parse(res.data)
-				this.setState({
-					title: data['data']['article']['title'],
-					introduction: data['data']['article']['introduction'],
-					content: data['data']['article']['content']
-				})
-			}.bind(this)
-		)
+		this.getArticle()
+		console.log(this.state.error)
 	},
 	/*
 	 handleChange 分别绑定了title,introduction,content输入框
@@ -56,7 +71,8 @@ var CreateArticle = React.createClass({
 			'introduction': this.state.introduction,
 			'content': this.state.content
 		}
-		requestApi.updateArticle(article).pipe(
+		var id = this.props.params.id
+		requestApi.updateArticle(id, article).pipe(
 			function(res) {
 				if(res && res['meta'] && res['meta']['code'] == 200) {
 					this.setState({created: true})
@@ -70,10 +86,19 @@ var CreateArticle = React.createClass({
 	},
 
 	render() {
+		console.log(this.state)
 		if(!this.state.logged_in) {
 			return (
 					<div>
 						<p>You are not logged in, left 3s to jump to the login page... </p>
+						<Link to="/login">Login page</Link>
+					</div>
+			)
+		}
+		if(this.state.error.length !== 0) {
+			return (
+					<div>
+						<p>You have no privilege to edit this article, left 3s to jump to the first page... </p>
 						<Link to="/login">Login page</Link>
 					</div>
 			)

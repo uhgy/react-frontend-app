@@ -9,8 +9,7 @@ var Article = React.createClass({
 	getInitialState() {
 		return {
 			logged_in: auth.loggedIn(),
-			article: "",
-			id: this.props.params.id
+			article: ""
 		}
 	},
 
@@ -26,7 +25,7 @@ var Article = React.createClass({
 		/*
 		获取文章列表
 		 */
-		requestApi.getArticle(this.state.id).pipe(
+		requestApi.getArticle(this.props.params.id).pipe(
 			function(res){
 				console.log(res)
 				this.setState({ article: res['data']['article'] })

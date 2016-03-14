@@ -14,7 +14,7 @@ var Home = React.createClass({
 
 	},
 	render() {
-		return (
+			return (
 			<div>
 				<h2>Home</h2>
 				<article>

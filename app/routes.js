@@ -4,7 +4,7 @@
 import React from 'react';
 import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'react-router';
 import auth from './auth';
-import ArticleList from './components/ArticleList';
+import Articles from './components/Articles';
 import Article from './components/Article';
 import CreateArticle from './components/CreateArticle';
 import EditArticle from './components/EditArticle';
@@ -21,7 +21,7 @@ export default (
 	<Router history={browserHistory}>
 		<Route path="/" component={App} >
 			<IndexRoute component={Home}/>
-			<Route path="/article" component={ArticleList}/>
+			<Route path="/article" component={Articles}/>
 			<Route path="/article/:id" component={Article}/>
 			<Route path="/create/article" component={CreateArticle}/>
 			<Route path="/edit/article/:id" component={EditArticle}/>

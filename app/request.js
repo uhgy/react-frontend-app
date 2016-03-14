@@ -44,11 +44,10 @@ var requestApi = {
 		});
 	},
 
-	updateArticle(article) {
-		article.user_id = readCookie("user_id")
+	updateArticle(id, article) {
 		return $.ajax({
-			url: '/api/article/'+article.id,
-			method: 'POST',
+			url: '/api/article/'+id,
+			method: 'PUT',
 			data: article
 		}).done(function (res) {
 
