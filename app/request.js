@@ -10,7 +10,6 @@ var requestApi = {
 			}).fail(function (err) {
 				console.log(err);
 			});
-
 	},
 
 	getArticle(id) {
@@ -61,6 +60,16 @@ var requestApi = {
 			url: '/api/article/'+id,
 			method: 'DELETE'
 		}).done(function (res) {
+
+		}).fail(function (err) {
+			console.log(err);
+		});
+	},
+
+	getRecentArticles(page) {
+		var user_id = readCookie("user_id")
+		return $.get('/api/article?page='+page)
+		done(function (res) {
 
 		}).fail(function (err) {
 			console.log(err);

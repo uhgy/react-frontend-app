@@ -144,6 +144,7 @@ Footer component
 
 footer {
   overflow: hidden;
+  clear:both;
   border-width: .08em;
   box-shadow: 0 .1em .1em -.05em;
   background: #FFFFFF;
@@ -175,7 +176,6 @@ main-body
   min-height: 30em;
   clear:both;
 }
-
 
 /*
 Login component
@@ -252,7 +252,64 @@ form.login {
 
 }
 
+/*
+Home component
+*/
 
+.home {
+  //overflow: hidden;
+  section.article-area {
+    float:left;
+    margin-right: -18em;
+    width:100%;
+    //border: 1px solid black;
+    .article-list {
+      width:auto;
+      margin-right:18em;
+    }
+  }
+
+  aside {
+    float: right;
+    width:15em;
+    border: 1px solid red;
+    margin:1em;
+    height: 30em;
+  }
+}
+
+/*
+ArticleList component
+*/
+
+.article-list {
+  article {
+    overflow: hidden;
+    margin: 1em auto;
+    background: #999;
+    section {
+      display: block;
+      width: 100%;
+      overflow: hidden;
+      margin: 1em auto;
+      .article-content div{
+
+      }
+    }
+    div {
+      border: 1px solid;
+      float: left;
+      margin: 1em;
+    }
+    h3 {
+      width: 10em;
+    }
+    a {
+      padding: .25em .25em;
+      background-color: #d9534f;
+    }
+  }
+}
 /*
 CreateArticle component
 */
@@ -285,37 +342,7 @@ CreateArticle component
   }
 }
 
-/*
-ArticleList component
-*/
 
-.article-list {
-  article {
-    overflow: hidden;
-    margin: 1em auto;
-    background: #999;
-    section {
-      display: block;
-      width: 100%;
-      overflow: hidden;
-      margin: 1em auto;
-    }
-    div {
-      border: 1px solid;
-      float: left;
-      margin: 1em;
-    }
-    h3 {
-      width: 10em;
-    }
-    a {
-      padding: .25em .25em;
-      background-color: #d9534f;
-    }
-  }
-
-
-}
 
 
 
@@ -336,6 +363,18 @@ ArticleList component
       width: 18em;
     }
     
+  }
+  .home {
+    section.article-area {
+      float:left;
+      margin-right: 0em;
+      .article-list {
+        margin-right:0em;
+      }
+    }
+    aside {
+      display:none
+    }
   }
 }
 
@@ -371,5 +410,17 @@ and (orientation : portrait) {
       width: 18em;
     }
 
+  }
+  .home {
+    section.article-area {
+      float:left;
+      margin-right: 0em;
+      .article-list {
+        margin-right:0em;
+      }
+    }
+    aside {
+      display:none
+    }
   }
 }

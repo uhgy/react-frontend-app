@@ -25,9 +25,9 @@ var CreateArticle = React.createClass({
 					console.log(res)
 					if(res && res['meta'] && res['meta']['code'] == 200) {
 						this.setState({
-							title: res['data']['article']['title'],
-							introduction: res['data']['article']['introduction'],
-							content: res['data']['article']['content']
+							title: res.data.article.title,
+							introduction: res.data.article.introduction,
+							content: res.data.article.content
 						})
 					} else{
 						this.setState({
@@ -74,7 +74,7 @@ var CreateArticle = React.createClass({
 		var id = this.props.params.id
 		requestApi.updateArticle(id, article).pipe(
 			function(res) {
-				if(res && res['meta'] && res['meta']['code'] == 200) {
+				if(res && res.meta && res.meta.code == 200) {
 					this.setState({created: true})
 					browserHistory.push('/article')
 				}else {
@@ -95,7 +95,8 @@ var CreateArticle = React.createClass({
 					</div>
 			)
 		}
-		if(this.state.error.length !== 0) {
+		var error = this.state.error
+		if(error.length !== 0 && error.code !== "200") {
 			return (
 					<div>
 						<p>You have no privilege to edit this article, left 3s to jump to the first page... </p>
