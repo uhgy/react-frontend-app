@@ -2,6 +2,7 @@ import React from 'react';
 import {render} from 'react-dom';
 import {browserHistory, Link} from 'react-router';
 import requestApi from '../request';
+import auth from './../auth';
 
 var CreateArticle = React.createClass({
 	getInitialState() {
@@ -14,7 +15,12 @@ var CreateArticle = React.createClass({
 	},
 
 	componentDidMount() {
-
+		if(!this.state.logged_in) {
+			setTimeout(
+					function() {
+						browserHistory.push('/login')
+					}, 3000)
+		}
 	},
 	/*
 	  handleChange 分别绑定了title,introduction,content输入框
@@ -51,6 +57,14 @@ var CreateArticle = React.createClass({
 	},
 
 	render() {
+		if(!this.state.logged_in) {
+			return (
+					<div>
+						<p>You are not logged in, left 3s to jump to the login page... </p>
+						<Link to="/login">Login page</Link>
+					</div>
+			)
+		}
 		return (
 			<section>
 				{this.state.created ? (<p>Success</p>) : (

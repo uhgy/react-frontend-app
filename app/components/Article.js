@@ -2,6 +2,7 @@ import React from 'react';
 import {render} from 'react-dom';
 import {Link} from 'react-router';
 import requestApi from '../request';
+import auth from './../auth';
 
 var Article = React.createClass({
 	getInitialState() {
@@ -11,7 +12,15 @@ var Article = React.createClass({
 		}
 	},
 
+
+
 	componentDidMount() {
+		if(!this.state.logged_in) {
+			setTimeout(
+					function() {
+						browserHistory.push('/login')
+					}, 3000)
+		}
 		/*
 		获取文章列表
 		 */
@@ -26,6 +35,14 @@ var Article = React.createClass({
 
 	render() {
 		var article = this.state.article;
+		if(!this.state.logged_in) {
+			return (
+					<div>
+						<p>You are not logged in, left 3s to jump to the login page... </p>
+						<Link to="/login">Login page</Link>
+					</div>
+			)
+		}
 		return (
 			<article>
 				<h3>{article.title}</h3>

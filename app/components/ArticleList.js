@@ -6,6 +6,7 @@ import {render} from 'react-dom';
 import {browserHistory, Link} from 'react-router';
 import ReactPaginate from 'react-paginate';
 import requestApi from '../request';
+import auth from './../auth';
 
 var styles = {};
 
@@ -27,6 +28,7 @@ styles.toTop = {
 var ArticleList = React.createClass({
 	getInitialState() {
 		return {
+			logged_in: auth.loggedIn(),
 			articles: [],
 			isTop: true,
 			timer: null,
@@ -56,9 +58,17 @@ var ArticleList = React.createClass({
 			this.setState({isTop: false})
 	},
 
+	componentWillMount() {
 
+	},
 
 	componentDidMount() {
+		if(!this.state.logged_in) {
+			setTimeout(
+					function() {
+						browserHistory.push('/login')
+					}, 3000)
+		}
 		var page = this.state.page
 		this.updateArticleList(page)
 		window.addEventListener('scroll', this.onScrollToTop, false)
@@ -126,7 +136,15 @@ var ArticleList = React.createClass({
 	},
 
 	render() {
-		//console.log('render')
+		console.log('render')
+		if(!this.state.logged_in) {
+			return (
+					<div>
+						<p>You are not logged in, left 3s to jump to the login page... </p>
+						<Link to="/login">Login page</Link>
+					</div>
+			)
+		}
 		if(this.state.articles.length === 0) {
 			if(this.state.fetchData === 'done') {
 				return <p>There is no articles!</p>
