@@ -17,15 +17,18 @@ var App = React.createClass({
 
 	getInitialState() {
 		return {
-			loggedIn: auth.loggedIn()
+			logged_in: auth.loggedIn(),
+			username: auth.userInfo().username,
+			user_id: auth.userInfo().user_id
 
 		}
 	},
 
-	updateAuth(loggedIn) {
-		this.setState({
-			loggedIn: loggedIn
-		})
+	updateAuth(logged_in) {
+		var username = auth.userInfo().username
+		var user_id = auth.userInfo().user_id
+		this.setState({logged_in: logged_in, user_id: user_id, username: username})
+
 	},
 
 	componentWillMount() {
@@ -36,9 +39,9 @@ var App = React.createClass({
 	render() {
 		return (
 			<div>
-				<NavBar/>
+				<NavBar {...this.state}/>
 				<div className="main-body">
-					{this.props.children || <p>You are {!this.state.loggedIn && 'not'} logged in.</p>}
+					{this.props.children || <p>You are {!this.state.logged_in && 'not'} logged in.</p>}
 				</div>
 				<Footer/>
 			</div>

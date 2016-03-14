@@ -4,7 +4,7 @@
 
 import React from 'react';
 import {render} from 'react-dom';
-
+//import ArticleList f
 var Home = React.createClass({
 	getInitialState() {
 		return {}
@@ -28,8 +28,8 @@ var Home = React.createClass({
 						<li>修改密码</li>
 						<li>user关系</li>
 					</ul>
-
 				</article>
+
 			</div>
 		)
 	}

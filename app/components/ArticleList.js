@@ -126,7 +126,7 @@ var ArticleList = React.createClass({
 	},
 
 	render() {
-		console.log('render')
+		//console.log('render')
 		if(this.state.articles.length === 0) {
 			if(this.state.fetchData === 'done') {
 				return <p>There is no articles!</p>
