@@ -5,10 +5,10 @@ import React from 'react';
 import {render} from 'react-dom';
 import {browserHistory, Link} from 'react-router';
 import ReactPaginate from 'react-paginate';
-import requestApi from '../request';
-import auth from './../auth';
+import requestApi from '../../request';
+import auth from './../../auth';
 import ArticleList from './ArticleList';
-import ScrollButton from './ScrollButton';
+import ScrollButton from './../ScrollButton';
 var styles = {};
 
 /*

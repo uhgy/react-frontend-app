@@ -3,6 +3,7 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var request = require('request');
 var rewrite = require('express-urlrewrite');
+var fs = require('fs');
 var app = express();
 
 var config = require('./server.config');

@@ -4,10 +4,10 @@
 import React from 'react';
 import { Router, Route, IndexRoute, Link, IndexLink, browserHistory } from 'react-router';
 import auth from './auth';
-import Articles from './components/Articles';
-import Article from './components/Article';
-import CreateArticle from './components/CreateArticle';
-import EditArticle from './components/EditArticle';
+import Articles from './components/Article/Articles';
+import Article from './components/Article/Article';
+import CreateArticle from './components/Article/CreateArticle';
+import EditArticle from './components/Article/EditArticle';
 import User from './components/User';
 import Register from './components/Register';
 import Login from './components/Login';

@@ -4,7 +4,7 @@
 import React from 'react';
 import {render} from 'react-dom';
 import {browserHistory, Link} from 'react-router';
-import ScrollButton from './ScrollButton';
+import ScrollButton from './../ScrollButton';
 
 var ArticleList = React.createClass({
 	getInitialState() {
