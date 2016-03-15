@@ -5,7 +5,7 @@
 import React from 'react';
 import {render} from 'react-dom';
 import requestApi from '../request';
-import ArticleList from './ArticleList';
+import ArticleList from './Article/ArticleList';
 import ScrollButton from './ScrollButton';
 
 var Home = React.createClass({
@@ -76,7 +76,8 @@ var Home = React.createClass({
 	onScrollToBottom() {
 		var clientHeight = document.documentElement.clientHeight
 		var osTop = document.documentElement.scrollTop || document.body.scrollTop
-		if(osTop + clientHeight >= this.getDocHeight()) {
+		if(osTop + clientHeight >= this.getDocHeight()-5
+			&& this.state.fetchData !== "nomore") {
 			this.updateArticleList(this.state.page+1)
 		}
 	},
