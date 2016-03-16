@@ -12,13 +12,7 @@ var ArticleList = React.createClass({
 	},
 
 	render() {
-		if(this.props.articles.length === 0) {
-			if(this.props.fetchData === 'done') {
-				return <p>There is no articles!</p>
-			} else if(this.props.fetchData === 'loading') {
-				return <p>loading......</p>
-			}
-		}
+		console.log(this.props)
 		return (
 				<div className="article-list">
 					{this.props.articles.map(function (article) {
@@ -44,3 +38,5 @@ var ArticleList = React.createClass({
 })
 
 export default ArticleList;
+
+//<div><img src={`/public/img/cars/${article.id}.jpeg`} alt=""/></div>

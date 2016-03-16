@@ -12,7 +12,7 @@ var Home = React.createClass({
 	getInitialState() {
 		return {
 			articles: [],
-			fetchData: 'loading',
+			fetchData: 'free',
 			pageNum: 0,
 			page: 1
 		}
@@ -34,10 +34,16 @@ var Home = React.createClass({
 	 向后端发请求获取article列表
 	 */
 	updateArticleList(page) {
+		this.setState({
+			page: page,
+			fetchData: 'loading'
+		})
 		requestApi.getRecentArticles(page).pipe(
 				function(res){
+					//获取文章列表数据成功
 					if(res.data.perPage && res.data.total
 							&& res.meta.code === "200") {
+						//已经到最后一页
 						if(this.state.page * res.data.perPage < res.data.total) {
 							var pageNum = Math.ceil(res.data.total / res.data.perPage)
 							if (pageNum === parseInt(pageNum, 10)) {
@@ -47,15 +53,17 @@ var Home = React.createClass({
 							res.data.articles.map(function (article) {
 								articles.push(article)
 							})
-							console.log(articles)
 							this.setState({
 								articles: articles,
-								fetchData: 'done',
-								page: page
+								fetchData: 'done'
 							})
 						} else {
-							this.setState({fetchData: "nomore"})
+							this.setState({
+								fetchData: "nomore"
+							})
 						}
+					} else {
+						this.setState({page: page-1})
 					}
 				}.bind(this)
 		)
@@ -76,18 +84,20 @@ var Home = React.createClass({
 	onScrollToBottom() {
 		var clientHeight = document.documentElement.clientHeight
 		var osTop = document.documentElement.scrollTop || document.body.scrollTop
+		var fetchData = this.state.fetchData
 		if(osTop + clientHeight >= this.getDocHeight()-5
-			&& this.state.fetchData !== "nomore") {
+			&& fetchData !== "nomore" && fetchData !== "loading") {
 			this.updateArticleList(this.state.page+1)
 		}
 	},
 
 	render() {
 		var loadMore = (function() {
-			if(this.state.fetchData === "loading") {
-				return <div>正在加载.........</div>;
-			} else if(this.state.fetchData === "nomore") {
-				return <div>没有更多文章了</div>;
+			var fetchData = this.state.fetchData
+			if(fetchData === "loading") {
+				return <div>loading.........</div>;
+			} else if(fetchData === "nomore") {
+				return <div>no more articles</div>;
 			}
 		}.bind(this))()
 		return (

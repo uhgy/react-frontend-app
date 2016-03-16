@@ -38,7 +38,6 @@ var Articles = React.createClass({
 	},
 
 	componentWillMount() {
-
 	},
 
 	componentDidMount() {
@@ -88,6 +87,13 @@ var Articles = React.createClass({
 						<Link to="/login">Login page</Link>
 					</div>
 			)
+		}
+		if(this.state.articles.length === 0) {
+			if(this.state.fetchData === 'done') {
+				return <p>There is no articles!</p>
+			} else if(this.state.fetchData === 'loading') {
+				return <p>loading......</p>
+			}
 		}
 		return (
 			<section className="article-list">

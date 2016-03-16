@@ -25,8 +25,8 @@ if(config.env_mode == 'dev'){
 	app.use(express.static(path.join(__dirname, 'build')));
 }else if(config.env_mode == 'deploy' || config.env_mode == 'production'){
 	app.use(express.static(path.join(__dirname, 'dist')));
-	app.use('/public', express.static(path.join(__dirname, 'public')));
 }
+app.use('/public', express.static(path.join(__dirname, 'public')));
 
 
 
