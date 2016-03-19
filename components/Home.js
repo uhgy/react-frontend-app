@@ -85,7 +85,7 @@ var Home = React.createClass({
 		var clientHeight = document.documentElement.clientHeight
 		var osTop = document.documentElement.scrollTop || document.body.scrollTop
 		var fetchData = this.state.fetchData
-		if(osTop + clientHeight === this.getDocHeight()
+		if(osTop + clientHeight >= this.getDocHeight() - 5
 			&& fetchData !== "nomore" && fetchData !== "loading") {
 			this.updateArticleList(this.state.page+1)
 		}
