@@ -4,7 +4,7 @@
 import React from 'react';
 import {render} from 'react-dom';
 import {Link} from 'react-router';
-import requestApi from '../request';
+import requestApi from '../middleware/request';
 
 var User = React.createClass({
 	getInitialState() {

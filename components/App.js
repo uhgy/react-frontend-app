@@ -4,7 +4,7 @@
 
 import React from 'react';
 import {render} from 'react-dom';
-import auth from './../auth';
+import auth from '../middleware/auth';
 import Login from './Login';
 import NavBar from './NavBar';
 import Footer from './Footer';
@@ -20,7 +20,6 @@ var App = React.createClass({
 			logged_in: auth.loggedIn(),
 			username: auth.userInfo().username,
 			user_id: auth.userInfo().user_id
-
 		}
 	},
 

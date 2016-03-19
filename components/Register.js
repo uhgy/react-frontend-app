@@ -4,7 +4,7 @@
 
 import React from 'react';
 import {render} from 'react-dom';
-import auth from './../auth';
+import auth from '../middleware/auth';
 
 var Register = React.createClass({
 	contextTypes: {

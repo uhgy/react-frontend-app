@@ -1,8 +1,8 @@
 import React from 'react';
 import {render} from 'react-dom';
 import {browserHistory, Link} from 'react-router';
-import requestApi from '../../request';
-import auth from './../../auth';
+import requestApi from '../../middleware/request';
+import auth from '../../middleware/auth';
 
 var CreateArticle = React.createClass({
 	getInitialState() {
